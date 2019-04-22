@@ -11,30 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('Select');
-})->name('Home');;
-
-Route::get('/Login', function () {
-    return view('login.Login');
-})->name('Login');
-
-Route::get('/add', function () {
-    return view('Base.Add');
-})->name('DataBaseAdd');
-
-Route::get('/Insurance', function () {
-    return view('Insurances.List');
-})->name('InsurancesList');
-
-Route::get('/Search', function () {
-    return view('Search');
-})->name('Search');
-
-Route::get('/Base/', function () {
-    return view('Base.Main');
-})->name('Base');
-
+Route::get('/', [
+    'uses' => 'SitesController@index',
+    'as' => 'home',
+]);
+Route::get('/add', [
+    'uses' => 'SitesController@add',
+    'as' => 'add',
+]);
+Route::get('/insurance', [
+    'uses' => 'SitesController@insurance',
+    'as' => 'insurance',
+]);
+Route::get('/search', [
+    'uses' => 'SitesController@search',
+    'as' => 'search',
+]);
+Route::get('/base', [
+    'uses' => 'SitesController@base',
+    'as' => 'base',
+]);
 
 
 Auth::routes();
