@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BloodGroupSeeder::class,
             TreatmentsSeeder::class,
+            UsersTableSeeder::class,
         ]);
     }
 }
