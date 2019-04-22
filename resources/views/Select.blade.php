@@ -3,9 +3,10 @@
 @section('title', 'SAMS')
 
 @section('body')
-
-    <div class="select_SAMS">
-        <a href="{{route('login')}}"> Login to SAMS WL Database </a>
-    </div>
+    <a href="{{route('login')}}" class ="login_SAMS">
+        <div class="select_SAMS">
+            <p class="Login_Text">Login to SAMS Database</p>
+        </div>
+    </a>
 
 @endsection
