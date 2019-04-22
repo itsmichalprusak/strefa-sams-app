@@ -1,0 +1,26 @@
+.select_SAMS{
+    margin: auto;
+    width: 20vw;
+    border: 3px solid dodgerblue;
+    border-radius: 25px;
+    background-color: #a1cbef;
+    padding: 10px;
+}
+
+.login_SAMS{
+    text-align: center;
+    padding: 10px;
+    color: black;
+    font-size: 125%;
+    text-decoration: none;
+}
+
+.login_SAMS:hover{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.Login_Text{
+    margin: 2vw;
+}
