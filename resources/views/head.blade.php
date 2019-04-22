@@ -28,7 +28,7 @@
             <div class="container">
 
                 @yield('body')
-
+                @yield('content')
             </div>
 
         </div>
