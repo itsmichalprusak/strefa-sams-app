@@ -24,3 +24,7 @@
 .Login_Text{
     margin: 2vw;
 }
+
+table {
+    table-layout: fixed;
+}
