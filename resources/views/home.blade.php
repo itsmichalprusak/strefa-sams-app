@@ -14,6 +14,15 @@
                             </div>
                         @endif
 
+                            @foreach ($patients as $user)
+                                {{$user->name}}
+                                {{$user->surname}}
+                                {{$user->birthdate}}
+                                {{$user->isinsured}}
+                                {{$user->comments}}
+                                {{$user->bloodgroup}}
+                            @endforeach
+
                     </div>
                 </div>
             </div>
