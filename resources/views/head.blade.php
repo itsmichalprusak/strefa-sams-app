@@ -37,6 +37,12 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/add">Dodaj Pracownika SAMS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/patient">Dodaj Pacjenta SAMS</a>
+                            </li>
                             @guest
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
