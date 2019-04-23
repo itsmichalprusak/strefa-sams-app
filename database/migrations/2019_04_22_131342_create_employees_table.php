@@ -17,11 +17,11 @@ class CreateEmployeesTable extends Migration
             $table->bigIncrements('Id');
             $table->String('Name', 100);
             $table->String('Surname', 100);
-            $table->date('LastPromotion');
+            $table->date('LastPromotion')->nullable();
             $table->string('Rank', 8);
-            $table->date('BirthDate');
-            $table->integer('PhoneNumber');
-            $table->bigInteger('UnderSupervision')->unsigned();
+            $table->date('BirthDate')->nullable();
+            $table->integer('PhoneNumber')->nullable();
+            $table->bigInteger('UnderSupervision')->unsigned()->nullable();
             $table->timestamps();
         });
     }

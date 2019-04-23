@@ -16,14 +16,14 @@ class CreateCardIndexesTable extends Migration
         Schema::create('CardIndexes', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->bigInteger('PatientId')->unsigned();
-            $table->string('Annotation', 8);
+            $table->string('Annotation', 8)->nullable();
             $table->date('Date');
             $table->bigInteger('SupervisingDoctor')->unsigned();
             $table->bigInteger('TreatmentCategoryId')->unsigned();
             $table->integer('Price');
             $table->boolean('IsPaid');
-            $table->mediumText('Recognition');
-            $table->mediumText('Treatment');
+            $table->mediumText('Recognition')->nullable();
+            $table->mediumText('Treatment')->nullable();
             $table->timestamps();
         });
     }
