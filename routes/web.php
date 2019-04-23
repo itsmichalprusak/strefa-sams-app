@@ -31,8 +31,10 @@ Route::get('/base', [
     'uses' => 'SitesController@base',
     'as' => 'base',
 ]);
+Route::get('/home', [
+    'uses' => 'SitesController@home',
+    'as' => 'home',
+]);
 
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
