@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SitesController extends Controller
 {
@@ -26,7 +27,17 @@ class SitesController extends Controller
         return view('Search');
     }
 
-    public function Base(){
+    public function base(){
         return view('Base.Main');
+    }
+
+    public function home(){
+
+        $patients = DB::select('SELECT patients.name, patients.surname, patients.isinsured, patients.email, patients.phonenumber, patients.birthdate, patients.comments, bloodgroups.bloodgroup 
+                                FROM patients, bloodgroups
+                                WHERE patients.bloodgroupid = bloodgroups.id
+                                ');
+
+        return view('home', ['patients'=>$patients]);
     }
 }
