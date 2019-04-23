@@ -18,12 +18,12 @@ class CreatePatientsTable extends Migration
             $table->string('Name', 100);
             $table->string('Surname', 100);
             $table->boolean('IsInsured');
-            $table->bigInteger('InsuranceID')->unsigned();
-            $table->string('Email', 100);
-            $table->integer('PhoneNumber');
-            $table->date('BirthDate');
-            $table->mediumText('Comments');
-            $table->bigInteger('BloodGroupID')->unsigned();
+            $table->bigInteger('InsuranceID')->unsigned()->nullable();
+            $table->string('Email', 100)->nullable();
+            $table->integer('PhoneNumber')->nullable();
+            $table->date('BirthDate')->nullable();
+            $table->mediumText('Comments')->nullable();
+            $table->bigInteger('BloodGroupID')->unsigned()->nullable();
             $table->timestamps();
         });
     }
