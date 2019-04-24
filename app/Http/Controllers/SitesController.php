@@ -34,7 +34,7 @@ class SitesController extends Controller
 
         DB::table('Employees') -> insert($data);
 
-        return redirect('home');
+        return redirect(Route('EmployeesList'));
     }
 
     public function addpatient(Request $req){
@@ -51,7 +51,7 @@ class SitesController extends Controller
 
         DB::table('Patients') -> insert($data);
 
-        return redirect('home');
+        return redirect(Route('PatientsList'));
     }
 
     public function insurance(){
@@ -162,7 +162,7 @@ class SitesController extends Controller
         DB::update('UPDATE Patients SET IsInsured = 1 WHERE Id= :PatientId', [$PatientId]);
 
         DB::table('Insurances') -> insert($data);
-        return redirect('home');
+        return redirect(Route('insurance'));
     }
 
     public function CardIndexes(){
@@ -199,7 +199,7 @@ class SitesController extends Controller
 
         DB::table('CardIndexes') -> insert($data);
 
-        return redirect('home');
+        return redirect(Route('home'));
     }
 
     public function PatientsList(){
