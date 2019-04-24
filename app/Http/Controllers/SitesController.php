@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use App\Http\Controllers\Controller;
 
 class SitesController extends Controller
 {
@@ -55,7 +56,7 @@ class SitesController extends Controller
 
     public function insurance(){
 
-        $insurances = DB::select('SELECT Patients.Name, Patients.Surname, Insurances.InsuranceAmount, Insurances.InsuranceDate, Employees.Name as emName, Employees.Surname as emSurname
+        $insurances = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, Insurances.InsuranceAmount, Insurances.InsuranceDate, Employees.Name as emName, Employees.Surname as emSurname
                                         FROM Patients, Insurances, Employees
                                         WHERE Insurances.PatientId = Patients.Id
                                         AND Insurances.PersonIssuing = Employees.Id
@@ -78,15 +79,16 @@ class SitesController extends Controller
                                 FROM Patients, BloodGroups
                                 WHERE Patients.BloodGroupid = BloodGroups.id
                                 ');
-        $cardindexes = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, CardIndexes.Annotation, 
-                                        CardIndexes.Date, Employees.Id as emId, Employees.Name as emName, Employees.Surname as emSurname, 
-                                        Treatments.TreatmentCategory, CardIndexes.Price, CardIndexes.IsPaid, 
-                                        CardIndexes.Recognition, CardIndexes.Treatment 
-                                    FROM Patients, CardIndexes, Treatments, Employees 
-                                    WHERE CardIndexes.PatientId = Patients.Id 
-                                    AND CardIndexes.SupervisingDoctor = Employees.Id
-                                    AND CardIndexes.TreatmentCategoryId = Treatments.Id
-                                ');
+
+        $cardindexes = DB::table('CardIndexes')
+                            ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                            ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
+                            ->join('Treatments', 'Treatments.Id', '=', 'TreatmentCategoryId')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Employees.Id as emId', 'Employees.Name as emName',
+                                'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
+                                'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
+                            ->paginate(10)
+                            ;
 
         return view('home', ['patients'=>$patients, 'cardindexes'=>$cardindexes]);
     }
@@ -109,15 +111,26 @@ class SitesController extends Controller
         $cardindexes = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, CardIndexes.Annotation, 
                                         CardIndexes.Date, Employees.Id as emId, Employees.Name as emName, Employees.Surname as emSurname, 
                                         Treatments.TreatmentCategory, CardIndexes.Price, CardIndexes.IsPaid, 
-                                        CardIndexes.Recognition, CardIndexes.Treatment 
+                                        Treatments.Description, CardIndexes.Recognition, CardIndexes.Treatment 
                                     FROM Patients, CardIndexes, Treatments, Employees 
                                     WHERE CardIndexes.PatientId = Patients.Id 
                                     AND CardIndexes.SupervisingDoctor = Employees.Id
                                     AND CardIndexes.TreatmentCategoryId = Treatments.Id
-                                    AND Patients.Id = :id', [$id]
-                                );
+                                    AND Patients.Id = :id
+                                    ORDER BY CardIndexes.Date DESC
+                                    ', [$id]);
+        $cards = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, CardIndexes.Annotation,
+                                    CardIndexes.Date, Treatments.TreatmentCategory,Treatments.Description, CardIndexes.Price, 
+                                    CardIndexes.IsPaid, CardIndexes.Recognition, CardIndexes.Treatment
+                            FROM Patients, CardIndexes, Treatments, Employees
+                            WHERE CardIndexes.PatientId = Patients.Id
+                            AND CardIndexes.SupervisingDoctor = Employees.Id
+                            AND CardIndexes.TreatmentCategoryId = Treatments.Id
+                            AND CardIndexes.SupervisingDoctor = :emId
+                            ORDER BY CardIndexes.Date DESC
+                            ', [$emid]);
 
-        return view('profiles.user', ['patients'=>$patients, 'id'=>$id, 'emid'=>$emid, 'employees'=>$employees, 'cardindexes'=>$cardindexes]);
+        return view('profiles.user', ['patients'=>$patients, 'id'=>$id, 'emid'=>$emid, 'employees'=>$employees, 'cardindexes'=>$cardindexes, 'cards' => $cards]);
     }
 
     public function patient(){
@@ -128,10 +141,10 @@ class SitesController extends Controller
     public function addinsurance(){
 
         $employees = DB::select('SELECT Employees.Id, Employees.Name, Employees.Surname
-                                        From Employees
+                                From Employees
                                 ');
         $patients = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname
-                                        From Patients
+                                From Patients
                                 ');
 
         return view('Base.Insurance', ['employees' => $employees, 'patients' => $patients]);
@@ -146,6 +159,8 @@ class SitesController extends Controller
 
         $data = array('PatientId' => $PatientId, 'InsuranceAmount' => $InsuranceAmount, 'InsuranceDate' => $InsuranceDate, 'PersonIssuing' => $PersonIssuing);
 
+        DB::update('UPDATE Patients SET IsInsured = 1 WHERE Id= :PatientId', [$PatientId]);
+
         DB::table('Insurances') -> insert($data);
         return redirect('home');
     }
@@ -153,16 +168,16 @@ class SitesController extends Controller
     public function CardIndexes(){
 
         $patients = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, Patients.IsInsured
-                                        From Patients
+                                From Patients
                                 ');
 
         $employees = DB::select('SELECT Employees.Id, Employees.Name, Employees.Surname
-                                        From Employees
+                                From Employees
                                 ');
         $treatments = DB::select('SELECT Treatments.Id, Treatments.TreatmentCategory, Treatments.UnInsurancePriceMin, 
                                                 Treatments.UnInsurancePriceMax, Treatments.InsurancePriceMin, 
                                                 Treatments.InsurancePriceMax, Treatments.Description
-                                        From Treatments
+                                From Treatments
                                 ');
 
         return view('Base.CardIndexes', ['employees' => $employees, 'patients' => $patients, 'treatments' => $treatments]);
@@ -189,11 +204,32 @@ class SitesController extends Controller
 
     public function PatientsList(){
 
-        $patients = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, Patients.BirthDate, Patients.PhoneNumber
-                                        From Patients
+        $patients = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, Patients.IsInsured, Patients.BirthDate, Patients.PhoneNumber
+                                FROM Patients
                                 ');
 
         return view('profiles.list', ['patients' => $patients]);
+    }
+
+    public function EmployeesList(){
+
+        $employees = DB::select('SELECT Employees.Id, Employees.Name, Employees.Surname, Employees.Rank, Employees.BirthDate, Employees.PhoneNumber
+                                FROM Employees
+                                ');
+
+        return view('profiles.employees', ['employees' => $employees]);
+    }
+
+    public function Debtors(){
+
+        $debtors = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, sum(CardIndexes.Price) as Debt
+                               FROM Patients, CardIndexes
+                               WHERE CardIndexes.PatientId = Patients.Id
+                               AND IsPaid = 0
+                               GROUP BY Patients.Id, Patients.Surname, Patients.Name
+                              ');
+
+        return view('Base.debtors', ['debtors' => $debtors]);
     }
 
 }
