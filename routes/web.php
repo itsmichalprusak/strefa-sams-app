@@ -31,16 +31,6 @@ Route::get('/insurance', [
     'as' => 'insurance',
 ]);
 
-Route::get('/search', [
-    'uses' => 'SitesController@search',
-    'as' => 'search',
-]);
-
-Route::get('/base', [
-    'uses' => 'SitesController@base',
-    'as' => 'base',
-]);
-
 Route::get('/home', [
     'uses' => 'SitesController@home',
     'as' => 'home',
