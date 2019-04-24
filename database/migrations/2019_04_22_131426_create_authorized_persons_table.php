@@ -17,7 +17,6 @@ class CreateAuthorizedPersonsTable extends Migration
             $table->bigIncrements('Id');
             $table->bigInteger('PatientId')->unsigned();
             $table->bigInteger('AuthorizedPerson')->unsigned();
-            $table->timestamps();
         });
     }
 
