@@ -19,7 +19,6 @@ class CreateInsurancesTable extends Migration
             $table->integer('InsuranceAmount');
             $table->date('InsuranceDate');
             $table->bigInteger('PersonIssuing')->unsigned();
-            $table->timestamps();
         });
     }
 
