@@ -61,5 +61,25 @@ Route::post('/patient', [
     'as' => 'addpatient',
 ]);
 
+Route::get('/insurance/add', [
+    'uses' => 'SitesController@addinsurance',
+    'as' => 'addInsurance',
+]);
+
+Route::post('/insurance/add', [
+    'uses' => 'SitesController@addinsurancedb',
+    'as' => 'addInsuranceDB',
+]);
+
+Route::get('/CardIndex/add', [
+    'uses' => 'SitesController@CardIndexes',
+    'as' => 'CardIndexes',
+]);
+
+Route::post('/CardIndex/add', [
+    'uses' => 'SitesController@CardIndexesDb',
+    'as' => 'CardIndexesDb',
+]);
+
 
 Auth::routes();
