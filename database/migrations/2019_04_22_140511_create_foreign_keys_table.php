@@ -27,9 +27,9 @@ class CreateForeignKeysTable extends Migration
             $table->foreign('PersonIssuing')->references('Id')->on('Employees');
         });
 
-        Schema::table('Employees', function (Blueprint $table) {
-            
-        });
+        //Schema::table('Employees', function (Blueprint $table) {
+
+        //});
 
         Schema::table('CardIndexes', function (Blueprint $table) {
             $table->foreign('PatientId')->references('Id')->on('Patients');
