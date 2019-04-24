@@ -24,7 +24,6 @@ class CreateCardIndexesTable extends Migration
             $table->boolean('IsPaid');
             $table->mediumText('Recognition')->nullable();
             $table->mediumText('Treatment')->nullable();
-            $table->timestamps();
         });
     }
 
