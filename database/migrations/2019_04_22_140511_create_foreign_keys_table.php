@@ -28,7 +28,7 @@ class CreateForeignKeysTable extends Migration
         });
 
         Schema::table('Employees', function (Blueprint $table) {
-            $table->foreign('UnderSupervision')->references('Id')->on('employees');
+            
         });
 
         Schema::table('CardIndexes', function (Blueprint $table) {
