@@ -19,8 +19,7 @@
                     @if($id)
                     <table style="width: 100%">
                     <tr>
-                        <th>Imie</th>
-                        <th>Nazwisko</th>
+                        <th>Imie i Nazwisko</th>
                         <th>Data Urodzenia</th>
                         <th>Ubezpieczony?</th>
                         <th>Komentarze</th>
@@ -28,15 +27,42 @@
                     </tr>
                     @foreach ($patients as $user)
                         <tr>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->surname}}</td>
-                            <td>{{$user->birthdate}}</td>
-                            <td>@if($user->isinsured == 0) Nie @else Tak @endif </td>
-                            <td>{{$user->comments}}</td>
-                            <td>{{$user->bloodgroup}}</td>
+                            <td>{{$user->Name}} {{$user->Surname}}</td>
+                            <td>{{$user->BirthDate}}</td>
+                            <td>@if($user->IsInsured == 0) Nie @else Tak @endif </td>
+                            <td>{{$user->Comments}}</td>
+                            <td>{{$user->BloodGroup}}</td>
                         </tr>
+                    @endforeach
+                    </table>
+                        <br><br><h2>Ostatnie wpisy o pacjencie</h2><br><br>
+                    <table style="width: 100%">
+                        <tr>
+                            <th>Imie i Nazwisko</th>
+                            <th>Odesłanie</th>
+                            <th>Data</th>
+                            <th>Lekarz Nadzorujący</th>
+                            <th>Kategoria zabiegu</th>
+                            <th>Cena</th>
+                            <th>Zapłacono?</th>
+                            <th>Rozpoznanie</th>
+                            <th>Zabieg</th>
+                        </tr>
+                        @foreach ($cardindexes as $card)
+                            <tr>
+                                <td>{{$card->Name}} {{$card->Surname}}</td>
+                                <td>{{$card->Annotation}}</td>
+                                <td>{{$card->Date}}</td>
+                                <td><a href="/user?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
+                                <td>{{$card->TreatmentCategory}}</td>
+                                <td>{{$card->Price}}</td>
+                                <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
+                                <td>{{$card->Recognition}}</td>
+                                <td>{{$card->Treatment}}</td>
+                            </tr>
                         @endforeach
                         </table>
+
                     @elseif($emid)
                         <table style="width: 100%">
                             <tr>
@@ -49,12 +75,12 @@
                             </tr>
                             @foreach ($employees as $employee)
                                 <tr>
-                                    <th>{{$employee->Name}} {{$employee->Surname}}</th>
-                                    <th>{{$employee->LastPromotion}}</th>
-                                    <th>{{$employee->Rank}}</th>
-                                    <th>{{$employee->BirthDate}}</th>
-                                    <th>{{$employee->PhoneNumber}}</th>
-                                    <th><a href="/user?emId={{$employee->UnderSupervision}}">{{$employee->UnderSupervision}}</a></th>
+                                    <td>{{$employee->Name}} {{$employee->Surname}}</td>
+                                    <td>{{$employee->LastPromotion}}</td>
+                                    <td>{{$employee->Rank}}</td>
+                                    <td>{{$employee->BirthDate}}</td>
+                                    <td>{{$employee->PhoneNumber}}</td>
+                                    <td><a href="/user?emId={{$employee->UnderSupervision}}">{{$employee->UnderSupervision}}</a></td>
                                 </tr>
                             @endforeach
                         </table>
