@@ -38,10 +38,22 @@
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/add">Dodaj Pracownika SAMS</a>
+                                <a class="nav-link" href="{{Route('home')}}">Ostatnie wpisy</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/patient">Dodaj Pacjenta SAMS</a>
+                                <a class="nav-link" href="{{Route('CardIndexes')}}">Dodaj Zabieg</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{Route('addInsurance')}}">Dodaj ubezpieczenie</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{Route('insurance')}}">Lista ubezpieczonych</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{Route('patient')}}">Dodaj Pacjenta SAMS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{Route('add')}}">Dodaj Pracownika SAMS</a>
                             </li>
                             @guest
                                 <li class="nav-item">
