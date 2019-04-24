@@ -34,7 +34,7 @@
                                         <td><a href="{{route('user')}}?id={{$card->Id}}">{{$card->Name}} {{$card->Surname}}</a></td>
                                         <td>{{$card->Annotation}}</td>
                                         <td>{{$card->Date}}</td>
-                                        <td><a href="/user?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
+                                        <td><a href="{{route('user')}}?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
                                         <td>{{$card->TreatmentCategory}}</td>
                                         <td>{{$card->Price}}</td>
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
@@ -43,6 +43,9 @@
                                     </tr>
                                 @endforeach
                             </table>
+
+                            {{$cardindexes->links()}}
+
                         </div>
 
                     </div>
