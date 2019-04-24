@@ -38,6 +38,8 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
+                            @if(Auth::guest())
+                            @else
                             <div class="nav-item">
                                 <a class="nav-link" href="{{Route('home')}}">Ostatnie wpisy</a>
                             </div>
@@ -59,6 +61,7 @@
                                     <li><a class="nav-link" href="{{Route('add')}}">Dodaj Pracownika SAMS</a></li>
                                 </ul>
                             </div>
+                            @endif
                             @guest
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
