@@ -8,6 +8,7 @@
         <title> @yield('title') </title>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/script.js') }}" defer></script>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -44,7 +45,9 @@
                                 <div class="nav-link btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Listy<span class="caret"></span></div>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="{{Route('insurance')}}">Lista ubezpieczonych</a></li>
+                                    <li><a class="nav-link" href="{{Route('Debtors')}}">Lista dłużników</a></li>
                                     <li><a class="nav-link" href="{{Route('PatientsList')}}">Lista pacjentów</a></li>
+                                    <li><a class="nav-link" href="{{Route('EmployeesList')}}">Lista pracowników</a></li>
                                 </ul>
                             </div>
                             <div class="nav-item dropdown">
