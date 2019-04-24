@@ -62,15 +62,7 @@ class SitesController extends Controller
                                         AND Insurances.PersonIssuing = Employees.Id
                                 ');
 
-        return view('Insurances.List', ['insurances' => $insurances]);
-    }
-
-    public function search(){
-        return view('Search');
-    }
-
-    public function base(){
-        return view('Base.Main');
+        return view('Insurances.list', ['insurances' => $insurances]);
     }
 
     public function home(){
