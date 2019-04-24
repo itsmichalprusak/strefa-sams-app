@@ -21,11 +21,12 @@
                 <option value="800">800</option>
                 <option value="1300">1300</option>
                 <option value="2200">2200</option>
+                <option value="9999">0 | Służby porządkowe</option>
             </select>
         </div>
         <div>
             <label>Data Dodania</label>
-            <input type="date" name="Date">
+            <input type="date" name="Date" value="{{date("Y-m-d")}}">
         </div>
         <div>
             <label>Osoba Dodająca</label>
