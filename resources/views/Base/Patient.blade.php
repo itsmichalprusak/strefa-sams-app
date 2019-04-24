@@ -45,7 +45,7 @@
             </select>
         </div>
         <div>
-            <input type="submit" value="Dodaj Pracownika">
+            <input type="submit" value="Dodaj Pacjenta">
         </div>
 
     </form>
