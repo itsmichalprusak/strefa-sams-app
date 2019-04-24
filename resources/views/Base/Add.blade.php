@@ -8,7 +8,7 @@
         {{csrf_field()}}
 
         <div>
-            <label>Imie</label>
+            <label>Imię</label>
             <input type="text" name="name" placeholder="Imie">
         </div>
         <div>
