@@ -29,7 +29,7 @@
         </div>
         <div>
             <label>Uwagi</label>
-            <textarea cols="50" name="Comments" placeholder="asd"></textarea>
+            <textarea cols="50" name="Comments" placeholder="Choroby, Leki, Leczenia"></textarea>
         </div>
         <div>
             <label>Grupa Krwi</label>
