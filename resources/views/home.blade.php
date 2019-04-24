@@ -31,7 +31,7 @@
                                 </tr>
                                 @foreach($cardindexes as $card)
                                     <tr>
-                                        <td><a href="/user?id={{$card->Id}}">{{$card->Name}} {{$card->Surname}}</a></td>
+                                        <td><a href="{{route('user')}}?id={{$card->Id}}">{{$card->Name}} {{$card->Surname}}</a></td>
                                         <td>{{$card->Annotation}}</td>
                                         <td>{{$card->Date}}</td>
                                         <td><a href="/user?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
