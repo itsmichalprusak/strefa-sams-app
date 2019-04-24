@@ -12,6 +12,8 @@
                 <th>Ranga</th>
                 <th>Data urodzenia</th>
                 <th>Numer telefonu</th>
+                <th>Edytuj</th>
+                <th>Usuń</th>
             </tr>
             @foreach($employees as $employee)
                 <tr>
@@ -19,6 +21,8 @@
                     <td>{{$employee->Rank}}</td>
                     <td>{{$employee->BirthDate}}</td>
                     <td>{{$employee->PhoneNumber}}</td>
+                    <td>Edytuj</td>
+                    <td>Usuń</td>
                 </tr>
             @endforeach
         </table>

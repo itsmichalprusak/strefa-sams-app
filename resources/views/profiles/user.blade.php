@@ -24,6 +24,8 @@
                         <th>Ubezpieczony</th>
                         <th>Komentarze</th>
                         <th>Grupa Krwi</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
                     </tr>
                     @foreach ($patients as $user)
                         <tr>
@@ -32,6 +34,8 @@
                             <td>@if($user->IsInsured == 0) Nie @else Tak @endif </td>
                             <td>{{$user->Comments}}</td>
                             <td>{{$user->BloodGroup}}</td>
+                            <td>Edytuj</td>
+                            <td>Usuń</td>
                         </tr>
                     @endforeach
                     </table>
@@ -47,6 +51,8 @@
                             <th>Zapłacono</th>
                             <th>Rozpoznanie</th>
                             <th>Zabieg</th>
+                            <th>Edytuj</th>
+                            <th>Usuń</th>
                         </tr>
                         @foreach ($cardindexes as $card)
                             <tr>
@@ -59,6 +65,8 @@
                                 <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                 <td>{{$card->Recognition}}</td>
                                 <td>{{$card->Treatment}}</td>
+                                <td>Edytuj</td>
+                                <td>Usuń</td>
                             </tr>
                         @endforeach
                         </table>
@@ -72,6 +80,8 @@
                                 <th>Data Urodzenia</th>
                                 <th>Numer telefonu</th>
                                 <th>Pod nadzorem</th>
+                                <th>Edytuj</th>
+                                <th>Usuń</th>
                             </tr>
                             @foreach ($employees as $employee)
                                 <tr>
@@ -81,6 +91,8 @@
                                     <td>{{$employee->BirthDate}}</td>
                                     <td>{{$employee->PhoneNumber}}</td>
                                     <td><a href="{{route('user')}}?emId={{$employee->UnderSupervision}}">{{$employee->UnderSupervision}}</a></td>
+                                    <td>Edytuj</td>
+                                    <td>Usuń</td>
                                 </tr>
                             @endforeach
                         </table>
@@ -95,6 +107,8 @@
                                 <th>Zapłacono</th>
                                 <th>Rozpoznanie</th>
                                 <th>Zabieg</th>
+                                <th>Edytuj</th>
+                                <th>Usuń</th>
                             </tr>
                             @foreach ($cards as $card)
                                 <tr>
@@ -106,6 +120,8 @@
                                     <td>{{$card->IsPaid}}</td>
                                     <td>{{$card->Recognition}}</td>
                                     <td>{{$card->Treatment}}</td>
+                                    <td>Edytuj</td>
+                                    <td>Usuń</td>
                                 </tr>
                             @endforeach
                         </table>

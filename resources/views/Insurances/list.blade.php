@@ -14,7 +14,8 @@
                 <th scope="col">Lekarz nadający ubezpieczenie</th>
                 <th scope="col">Data wygaśnięcia</th>
                 <th scope="col">Ilość dni pozostała</th>
-
+                <th scope="col">Edytuj</th>
+                <th scope="col">Usuń</th>
             </tr>
             <?php $now = time() ?>
             @foreach($insurances as $insurance)
@@ -45,6 +46,8 @@
                             Nigdy | Służby porządkowe
                         @endif
                     </td>
+                    <td>Edytuj</td>
+                    <td>Usuń</td>
                 </tr>
             @endforeach
         </table>

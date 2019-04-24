@@ -28,6 +28,8 @@
                                     <th scope="col">Zapłacono?</th>
                                     <th scope="col">Rozpoznanie</th>
                                     <th scope="col">Zabieg</th>
+                                    <th scope="col">Edytuj</th>
+                                    <th scope="col">Usuń</th>
                                 </tr>
                                 @foreach($cardindexes as $card)
                                     <tr>
@@ -40,6 +42,8 @@
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                         <td>{{$card->Recognition}}</td>
                                         <td>{{$card->Treatment}}</td>
+                                        <td>Edytuj</td>
+                                        <td>Usuń</td>
                                     </tr>
                                 @endforeach
                             </table>

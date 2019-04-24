@@ -12,6 +12,7 @@
                 <th>Ubezpieczony</th>
                 <th>Data urodzenia</th>
                 <th>Numer telefonu</th>
+                <th>Usuń</th>
             </tr>
             @foreach($patients as $patient)
                 <tr>
@@ -19,6 +20,7 @@
                     <td>@if($patient->IsInsured == 0) Nie @else Tak @endif</td>
                     <td>{{$patient->BirthDate}}</td>
                     <td>{{$patient->PhoneNumber}}</td>
+                    <td>Usuń</td>
                 </tr>
             @endforeach
         </table>
