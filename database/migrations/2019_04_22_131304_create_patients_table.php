@@ -24,7 +24,6 @@ class CreatePatientsTable extends Migration
             $table->date('BirthDate')->nullable();
             $table->mediumText('Comments')->nullable();
             $table->bigInteger('BloodGroupID')->unsigned()->nullable();
-            $table->timestamps();
         });
     }
 
