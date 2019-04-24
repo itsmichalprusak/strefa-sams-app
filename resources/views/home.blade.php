@@ -38,7 +38,7 @@
                                         <td>{{$card->TreatmentCategory}}</td>
                                         <td>{{$card->Price}}</td>
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
-                                        <td>{{$card->Recognition}} aklsjdghflkjasdgfhjklgsdhjfgdshjlfgsdlhjfgsdhjfg</td>
+                                        <td>{{$card->Recognition}}</td>
                                         <td>{{$card->Treatment}}</td>
                                     </tr>
                                 @endforeach
