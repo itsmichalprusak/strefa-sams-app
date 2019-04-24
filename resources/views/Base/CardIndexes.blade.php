@@ -21,7 +21,7 @@
         </div>
         <div>
             <label>Data Zabiegu</label>
-            <input type="date" name="Date">
+            <input type="date" name="Date" value="{{date("Y-m-d")}}">
         </div>
         <div>
             <label>Osoba Nadzorująca</label>
@@ -78,8 +78,8 @@
             @foreach($treatments as $treatment)
                 <tr>
                     <td>{{$treatment->TreatmentCategory}}</td>
-                    <td>{{$treatment->UnInsurancePriceMin}}</td>
-                    <td>{{$treatment->UnInsurancePriceMax}}</td>
+                    <td>@if($treatment->UnInsurancePriceMin == 99999) --------- @else {{$treatment->UnInsurancePriceMin}} @endif</td>
+                    <td>@if($treatment->UnInsurancePriceMax == 99999) --------- @else {{$treatment->UnInsurancePriceMax}} @endif</td>
                     <td>{{$treatment->InsurancePriceMin}}</td>
                     <td>{{$treatment->InsurancePriceMax}}</td>
                     <td>{{$treatment->Description}}</td>
