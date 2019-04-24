@@ -70,6 +70,7 @@
                             </tr>
                         @endforeach
                         </table>
+                        {{$cardindexes->links()}}
 
                     @elseif($emid)
                         <table style="width: 100%">
@@ -125,6 +126,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {{$cards->links()}}
 
                     @endif
                 </div>

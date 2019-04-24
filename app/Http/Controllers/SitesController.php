@@ -79,8 +79,7 @@ class SitesController extends Controller
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Employees.Id as emId', 'Employees.Name as emName',
                                 'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
                                 'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
-                            ->paginate(10)
-                            ;
+                            ->paginate(10);
 
         return view('home', ['patients'=>$patients, 'cardindexes'=>$cardindexes]);
     }
@@ -100,27 +99,29 @@ class SitesController extends Controller
                                 FROM Employees 
                                 WHERE Employees.Id = :emId', [$emid]
                                 );
-        $cardindexes = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, CardIndexes.Annotation, 
-                                        CardIndexes.Date, Employees.Id as emId, Employees.Name as emName, Employees.Surname as emSurname, 
-                                        Treatments.TreatmentCategory, CardIndexes.Price, CardIndexes.IsPaid, 
-                                        Treatments.Description, CardIndexes.Recognition, CardIndexes.Treatment 
-                                    FROM Patients, CardIndexes, Treatments, Employees 
-                                    WHERE CardIndexes.PatientId = Patients.Id 
-                                    AND CardIndexes.SupervisingDoctor = Employees.Id
-                                    AND CardIndexes.TreatmentCategoryId = Treatments.Id
-                                    AND Patients.Id = :id
-                                    ORDER BY CardIndexes.Date DESC
-                                    ', [$id]);
-        $cards = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, CardIndexes.Annotation,
-                                    CardIndexes.Date, Treatments.TreatmentCategory,Treatments.Description, CardIndexes.Price, 
-                                    CardIndexes.IsPaid, CardIndexes.Recognition, CardIndexes.Treatment
-                            FROM Patients, CardIndexes, Treatments, Employees
-                            WHERE CardIndexes.PatientId = Patients.Id
-                            AND CardIndexes.SupervisingDoctor = Employees.Id
-                            AND CardIndexes.TreatmentCategoryId = Treatments.Id
-                            AND CardIndexes.SupervisingDoctor = :emId
-                            ORDER BY CardIndexes.Date DESC
-                            ', [$emid]);
+
+        $cardindexes = DB::table('CardIndexes')
+                            ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                            ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
+                            ->join('Treatments', 'Treatments.Id', '=', 'CardIndexes.TreatmentCategoryId')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'CardIndexes.Annotation',
+                                        'CardIndexes.Date', 'Employees.Id as emId', 'Employees.Name as emName', 'Employees.Surname as emSurname',
+                                        'Treatments.TreatmentCategory', 'CardIndexes.Price', 'CardIndexes.IsPaid',
+                                        'Treatments.Description', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
+                            ->where('Patients.Id', '=', $id)
+                            ->orderByDesc('CardIndexes.Date')
+                            ->paginate(10);
+        
+        $cards = DB::table('CardIndexes')
+                    ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                    ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
+                    ->join('Treatments', 'Treatments.Id', '=', 'CardIndexes.TreatmentCategoryId')
+                    ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'CardIndexes.Annotation',
+                                    'CardIndexes.Date', 'Treatments.TreatmentCategory', 'Treatments.Description', 'CardIndexes.Price',
+                                    'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
+                    ->where('CardIndexes.SupervisingDoctor', '=', $emid)
+                    ->orderByDesc('CardIndexes.Date')
+                    ->paginate(10);
 
         return view('profiles.user', ['patients'=>$patients, 'id'=>$id, 'emid'=>$emid, 'employees'=>$employees, 'cardindexes'=>$cardindexes, 'cards' => $cards]);
     }
