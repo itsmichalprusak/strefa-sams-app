@@ -187,4 +187,13 @@ class SitesController extends Controller
         return redirect('home');
     }
 
+    public function PatientsList(){
+
+        $patients = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, Patients.BirthDate, Patients.PhoneNumber
+                                        From Patients
+                                ');
+
+        return view('profiles.list', ['patients' => $patients]);
+    }
+
 }
