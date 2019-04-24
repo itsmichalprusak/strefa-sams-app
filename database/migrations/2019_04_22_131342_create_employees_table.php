@@ -22,7 +22,6 @@ class CreateEmployeesTable extends Migration
             $table->date('BirthDate')->nullable();
             $table->integer('PhoneNumber')->nullable();
             $table->bigInteger('UnderSupervision')->unsigned()->nullable();
-            $table->timestamps();
         });
     }
 
