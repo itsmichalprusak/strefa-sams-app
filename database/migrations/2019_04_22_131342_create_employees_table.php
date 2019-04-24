@@ -18,7 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->String('Name', 100);
             $table->String('Surname', 100);
             $table->date('LastPromotion')->nullable();
-            $table->string('Rank', 8);
+            $table->string('Rank', 50);
             $table->date('BirthDate')->nullable();
             $table->integer('PhoneNumber')->nullable();
             $table->bigInteger('UnderSupervision')->unsigned()->nullable();
