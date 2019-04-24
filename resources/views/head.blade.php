@@ -37,24 +37,25 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
-                            <li class="nav-item">
+                            <div class="nav-item">
                                 <a class="nav-link" href="{{Route('home')}}">Ostatnie wpisy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{Route('CardIndexes')}}">Dodaj Zabieg</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{Route('addInsurance')}}">Dodaj ubezpieczenie</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{Route('insurance')}}">Lista ubezpieczonych</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{Route('patient')}}">Dodaj Pacjenta SAMS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{Route('add')}}">Dodaj Pracownika SAMS</a>
-                            </li>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <div class="nav-link btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Listy<span class="caret"></span></div>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="{{Route('insurance')}}">Lista ubezpieczonych</a></li>
+                                    <li><a class="nav-link" href="{{Route('PatientsList')}}">Lista pacjentów</a></li>
+                                </ul>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <div class="nav-link btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Dodania<span class="caret"></span></div>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="{{Route('CardIndexes')}}">Dodaj Zabieg</a></li>
+                                    <li><a class="nav-link" href="{{Route('addInsurance')}}">Dodaj ubezpieczenie</a></li>
+                                    <li><a class="nav-link" href="{{Route('patient')}}">Dodaj Pacjenta SAMS</a></li>
+                                    <li><a class="nav-link" href="{{Route('add')}}">Dodaj Pracownika SAMS</a></li>
+                                </ul>
+                            </div>
                             @guest
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
