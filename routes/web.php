@@ -81,5 +81,10 @@ Route::post('/CardIndex/add', [
     'as' => 'CardIndexesDb',
 ]);
 
+Route::get('/patients/list',[
+    'uses' => 'SitesController@PatientsList',
+    'as' => 'PatientsList',
+]);
+
 
 Auth::routes();
