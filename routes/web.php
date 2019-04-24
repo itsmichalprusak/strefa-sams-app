@@ -86,5 +86,15 @@ Route::get('/patients/list',[
     'as' => 'PatientsList',
 ]);
 
+Route::get('/employees/list',[
+    'uses' => 'SitesController@EmployeesList',
+    'as' => 'EmployeesList',
+]);
+
+Route::get('/debtors/list',[
+    'uses' => 'SitesController@Debtors',
+    'as' => 'Debtors',
+]);
+
 
 Auth::routes();
