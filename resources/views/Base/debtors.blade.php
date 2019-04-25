@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="table-responsive">
-        <input type="text" id="Input" onkeyup="SearchByName()" placeholder="Szukaj po imieniu">
+        <input type="text" id="Input" onkeyup="SearchByName()" class="form-control" placeholder="Szukaj po imieniu">
         <table id="table" class="table" width="100%">
             <tr>
                 <th>Imię i Nazwisko</th>
@@ -18,6 +18,7 @@
                 </tr>
             @endforeach
         </table>
+        {{$debtors->links()}}
     </div>
 
 @endsection
