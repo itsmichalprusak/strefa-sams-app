@@ -25,7 +25,6 @@
                         <th>Komentarze</th>
                         <th>Grupa Krwi</th>
                         <th>Edytuj</th>
-                        <th>Usuń</th>
                     </tr>
                     @foreach ($patients as $user)
                         <tr>
@@ -35,7 +34,6 @@
                             <td>{{$user->Comments}}</td>
                             <td>{{$user->BloodGroup}}</td>
                             <td>Edytuj</td>
-                            <td>Usuń</td>
                         </tr>
                     @endforeach
                     </table>
@@ -82,7 +80,6 @@
                                 <th>Numer telefonu</th>
                                 <th>Pod nadzorem</th>
                                 <th>Edytuj</th>
-                                <th>Usuń</th>
                             </tr>
                             @foreach ($employees as $employee)
                                 <tr>
@@ -93,7 +90,6 @@
                                     <td>{{$employee->PhoneNumber}}</td>
                                     <td><a href="{{route('user')}}?emId={{$employee->UnderSupervision}}">{{$employee->UnderSupervision}}</a></td>
                                     <td>Edytuj</td>
-                                    <td>Usuń</td>
                                 </tr>
                             @endforeach
                         </table>
