@@ -88,3 +88,28 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="Formd{{$card->CardId}}" tabindex="-1" role="dialog" aria-labelledby="DelCenter" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="DelTitle">Usuwanie zabiegu</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Jesteś pewny że chcesz usunąć zabieg?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                    <form method="POST" action="{{Route('CardIndexDelete')}}">
+                        {{csrf_field()}}
+                        <input type="hidden" name="CardIndexesId" value="{{$card->CardId}}">
+                        <input type="submit" class="btn btn-danger" value="Usuń">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
