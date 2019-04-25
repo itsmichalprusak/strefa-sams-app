@@ -86,5 +86,10 @@ Route::get('/debtors/list',[
     'as' => 'Debtors',
 ]);
 
+Route::post('/cardindexes/change',[
+   'uses' => 'SitesController@CardIndexUpdate',
+   'as' => 'CardIndexUpdate',
+]);
+
 
 Auth::routes();
