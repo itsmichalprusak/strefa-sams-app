@@ -13,7 +13,7 @@
             <input type="name" name="Name" id="imie" aria-describedby="firstname" placeholder="Imię Pacjenta" class="form-control">
             <small id="firstname" class="form-text text-muted">Podaj imię pacjenta, którego chcesz dodać do bazy.</small>
         </div>
-        <div>
+        <div class="form-group">
             <label for="nazwisko">Nazwisko</label>
             <input type="name" name="Surname" id="nazwisko" aria-describedby="nazwisko" placeholder="Nazwisko Pacjenta" class="form-control">
             <small id="nazwisko" class="form-text text-muted">Podaj Nazwisko pacjenta, którego chcesz dodać do bazy.</small>
