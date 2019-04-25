@@ -42,11 +42,16 @@
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                         <td>{{$card->Recognition}}</td>
                                         <td>{{$card->Treatment}}</td>
-                                        <td>Edytuj</td>
+                                        <td class="btn" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</td>
                                         <td>Usuń</td>
                                     </tr>
                                 @endforeach
+
                             </table>
+
+                            @foreach($cardindexes as $card)
+                                @include('popup.home')
+                            @endforeach
 
                             {{$cardindexes->links()}}
 
