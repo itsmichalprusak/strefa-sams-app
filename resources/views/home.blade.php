@@ -42,8 +42,8 @@
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                         <td>{{$card->Recognition}}</td>
                                         <td>{{$card->Treatment}}</td>
-                                        <td class="btn" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</td>
-                                        <td>Usuń</td>
+                                        <td><button class="btn" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</button></td>
+                                        <td><button class="btn" data-toggle="modal" data-target="#Formd{{$card->CardId}}">Usuń</button></td>
                                     </tr>
                                 @endforeach
 
