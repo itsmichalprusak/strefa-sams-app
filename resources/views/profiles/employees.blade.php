@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="table-responsive">
-        <input type="text" id="Input" onkeyup="SearchByName()" placeholder="Szukaj po imieniu">
+        <input type="text" id="Input" onkeyup="SearchByName()" class="form-control" placeholder="Szukaj po imieniu">
         <table id="table" class="table" width="100%">
             <tr>
                 <th>Imię i Nazwisko</th>
@@ -13,7 +13,6 @@
                 <th>Data urodzenia</th>
                 <th>Numer telefonu</th>
                 <th>Edytuj</th>
-                <th>Usuń</th>
             </tr>
             @foreach($employees as $employee)
                 <tr>
@@ -22,10 +21,10 @@
                     <td>{{$employee->BirthDate}}</td>
                     <td>{{$employee->PhoneNumber}}</td>
                     <td>Edytuj</td>
-                    <td>Usuń</td>
                 </tr>
             @endforeach
         </table>
+        {{$employees->links()}}
     </div>
 
 @endsection
