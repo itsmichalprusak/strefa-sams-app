@@ -73,11 +73,25 @@ class SitesController extends Controller
                             ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
                             ->join('Treatments', 'Treatments.Id', '=', 'TreatmentCategoryId')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Employees.Id as emId', 'Employees.Name as emName',
-                                'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
+                                'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'Treatments.Id as TreatmentId', 'CardIndexes.Id as CardId', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
                                 'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
                             ->paginate(10);
 
-        return view('home', ['cardindexes'=>$cardindexes]);
+        $patients = DB::table('Patients')
+            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
+            ->get();
+
+        $employees = DB::table('Employees')
+            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+            ->get();
+
+        $treatments = DB::table('Treatments')
+            ->select('Treatments.Id', 'Treatments.TreatmentCategory', 'Treatments.UnInsurancePriceMin',
+                'Treatments.UnInsurancePriceMax', 'Treatments.InsurancePriceMin',
+                'Treatments.InsurancePriceMax', 'Treatments.Description')
+            ->get();
+
+        return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments]);
     }
 
     public function user(){
@@ -223,6 +237,29 @@ class SitesController extends Controller
                             ->paginate(20);
 
         return view('Base.debtors', ['debtors' => $debtors]);
+    }
+
+    public function CardIndexUpdate(Request $req){
+
+        $PatientId = $req->input('PatientId');
+        $Annotation = $req->input('Annotation');
+        $Date = $req->input('Date');
+        $PersonIssuing = $req->input('PersonIssuing');
+        $TreatmentCategory = $req->input('TreatmentCategory');
+        $price = $req->input('price');
+        $IsPaid = $req->input('IsPaid');
+        $Recognition = $req->input('Recognition');
+        $Treatment = $req->input('Treatment');
+        $CardId = $req->input('CardId');
+
+        $data = array('PatientId' => $PatientId, 'Annotation' => $Annotation, 'Date' => $Date, 'SupervisingDoctor' => $PersonIssuing, 'TreatmentCategoryId' => $TreatmentCategory, 'Price' => $price, 'IsPaid' => $IsPaid, 'Recognition' => $Recognition, 'Treatment' => $Treatment);
+
+        DB::table('CardIndexes')
+                            ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                            ->where('CardIndexes.Id', '=', $CardId)
+                            ->update($data);
+
+        return redirect(Route('home'));
     }
 
 }
