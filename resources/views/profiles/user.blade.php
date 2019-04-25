@@ -22,8 +22,10 @@
                         <th>Imie i Nazwisko</th>
                         <th>Data Urodzenia</th>
                         <th>Ubezpieczony</th>
+                        <th>Numer Telefonu</th>
                         <th>Komentarze</th>
                         <th>Grupa Krwi</th>
+                        <th>Nick Discord</th>
                         <th>Edytuj</th>
                     </tr>
                     @foreach ($patients as $user)
@@ -31,9 +33,11 @@
                             <td>{{$user->Name}} {{$user->Surname}}</td>
                             <td>{{$user->BirthDate}}</td>
                             <td>@if($user->IsInsured == 0) Nie @else Tak @endif </td>
+                            <td>{{$user->PhoneNumber}}</td>
                             <td>{{$user->Comments}}</td>
                             <td>{{$user->BloodGroup}}</td>
-                            <td>Edytuj</td>
+                            <td>{{$user->Email}}</td>
+                            <td><button class="btn" data-toggle="modal" data-target="#FormEdit{{$user->Id}}">Edytuj</button></td>
                         </tr>
                     @endforeach
                     </table>
@@ -63,8 +67,8 @@
                                 <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                 <td>{{$card->Recognition}}</td>
                                 <td>{{$card->Treatment}}</td>
-                                <td>Edytuj</td>
-                                <td>Usuń</td>
+                                <td><button class="btn" data-toggle="modal" data-target="#FormEditd{{$card->CardId}}">Edytuj</button></td>
+                                <td><button class="btn" data-toggle="modal" data-target="#FormEditdel{{$card->CardId}}">Usuń</button></td>
                             </tr>
                         @endforeach
                         </table>
@@ -126,6 +130,8 @@
 
                     @endif
                 </div>
+                @include('popup.patients')
+                @include('popup.employees')
             </div>
         </div>
     </div>
