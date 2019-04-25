@@ -5,14 +5,13 @@
 @section('content')
 
     <div class="table-responsive">
-        <input type="text" id="Input" onkeyup="SearchByName()" placeholder="Szukaj po imieniu">
+        <input type="text" id="Input" onkeyup="SearchByName()" class="form-control" placeholder="Szukaj po imieniu">
         <table id="table" class="table" width="100%">
             <tr>
                 <th>Imię i Nazwisko</th>
                 <th>Ubezpieczony</th>
                 <th>Data urodzenia</th>
                 <th>Numer telefonu</th>
-                <th>Usuń</th>
             </tr>
             @foreach($patients as $patient)
                 <tr>
@@ -20,10 +19,10 @@
                     <td>@if($patient->IsInsured == 0) Nie @else Tak @endif</td>
                     <td>{{$patient->BirthDate}}</td>
                     <td>{{$patient->PhoneNumber}}</td>
-                    <td>Usuń</td>
                 </tr>
             @endforeach
         </table>
+        {{$patients->links()}}
     </div>
 
 @endsection
