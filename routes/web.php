@@ -91,5 +91,10 @@ Route::post('/cardindexes/change',[
    'as' => 'CardIndexUpdate',
 ]);
 
+Route::post('/cardindexes/deletes',[
+    'uses' => 'SitesController@CardIndexDelete',
+    'as' => 'CardIndexDelete',
+]);
+
 
 Auth::routes();
