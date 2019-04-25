@@ -56,21 +56,17 @@ class SitesController extends Controller
 
     public function insurance(){
 
-        $insurances = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, Insurances.InsuranceAmount, Insurances.InsuranceDate, Employees.Name as emName, Employees.Surname as emSurname
-                                        FROM Patients, Insurances, Employees
-                                        WHERE Insurances.PatientId = Patients.Id
-                                        AND Insurances.PersonIssuing = Employees.Id
-                                ');
+        $insurances = DB::table('Insurances')
+                            ->join('Patients', 'Patients.Id', '=', 'Insurances.PatientId')
+                            ->join('Employees', 'Employees.Id', '=', 'Insurances.PersonIssuing')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Insurances.InsuranceAmount',
+                                'Insurances.InsuranceDate', 'Employees.Name as emName', 'Employees.Surname as emSurname')
+                            ->paginate(10);
 
         return view('Insurances.list', ['insurances' => $insurances]);
     }
 
     public function home(){
-
-        $patients = DB::select('SELECT Patients.Name, Patients.Surname, Patients.IsInsured, Patients.Email, Patients.PhoneNumber, Patients.BirthDate, Patients.Comments, BloodGroups.BloodGroup 
-                                FROM Patients, BloodGroups
-                                WHERE Patients.BloodGroupid = BloodGroups.id
-                                ');
 
         $cardindexes = DB::table('CardIndexes')
                             ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
@@ -81,7 +77,7 @@ class SitesController extends Controller
                                 'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
                             ->paginate(10);
 
-        return view('home', ['patients'=>$patients, 'cardindexes'=>$cardindexes]);
+        return view('home', ['cardindexes'=>$cardindexes]);
     }
 
     public function user(){
@@ -89,16 +85,18 @@ class SitesController extends Controller
         $id = Input::get('id');
         $emid = Input::get('emId');
 
-        $patients = DB::select('SELECT Patients.Name, Patients.Surname, Patients.IsInsured, Patients.Email, Patients.PhoneNumber, Patients.BirthDate, Patients.Comments, BloodGroups.BloodGroup 
-                                FROM Patients, BloodGroups
-                                WHERE Patients.BloodGroupId = BloodGroups.Id
-                                AND Patients.id = :id', [$id]
-                                );
-        $employees = DB::select('SELECT Employees.Name, Employees.Surname, Employees.LastPromotion, 
-                                        Employees.Rank, Employees.BirthDate, Employees.PhoneNumber, Employees.UnderSupervision 
-                                FROM Employees 
-                                WHERE Employees.Id = :emId', [$emid]
-                                );
+        $patients = DB::table('Patients')
+                            ->join('BloodGroups', 'BloodGroups.Id', '=', 'Patients.BloodGroupId')
+                            ->select('Patients.Name', 'Patients.Surname', 'Patients.IsInsured', 'Patients.Email',
+                                'Patients.PhoneNumber', 'Patients.BirthDate', 'Patients.Comments', 'BloodGroups.BloodGroup')
+                            ->where('Patients.Id', '=', $id)
+                            ->get();
+
+        $employees = DB::table('Employees')
+                            ->select('Employees.Name', 'Employees.Surname', 'Employees.LastPromotion',
+                                        'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber', 'Employees.UnderSupervision')
+                            ->where('Employees.Id', '=', $emid)
+                            ->get();
 
         $cardindexes = DB::table('CardIndexes')
                             ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
@@ -111,17 +109,17 @@ class SitesController extends Controller
                             ->where('Patients.Id', '=', $id)
                             ->orderByDesc('CardIndexes.Date')
                             ->paginate(10);
-        
+
         $cards = DB::table('CardIndexes')
-                    ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
-                    ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
-                    ->join('Treatments', 'Treatments.Id', '=', 'CardIndexes.TreatmentCategoryId')
-                    ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'CardIndexes.Annotation',
-                                    'CardIndexes.Date', 'Treatments.TreatmentCategory', 'Treatments.Description', 'CardIndexes.Price',
-                                    'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
-                    ->where('CardIndexes.SupervisingDoctor', '=', $emid)
-                    ->orderByDesc('CardIndexes.Date')
-                    ->paginate(10);
+                            ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                            ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
+                            ->join('Treatments', 'Treatments.Id', '=', 'CardIndexes.TreatmentCategoryId')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'CardIndexes.Annotation',
+                                            'CardIndexes.Date', 'Treatments.TreatmentCategory', 'Treatments.Description', 'CardIndexes.Price',
+                                            'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
+                            ->where('CardIndexes.SupervisingDoctor', '=', $emid)
+                            ->orderByDesc('CardIndexes.Date')
+                            ->paginate(10);
 
         return view('profiles.user', ['patients'=>$patients, 'id'=>$id, 'emid'=>$emid, 'employees'=>$employees, 'cardindexes'=>$cardindexes, 'cards' => $cards]);
     }
@@ -133,12 +131,13 @@ class SitesController extends Controller
 
     public function addinsurance(){
 
-        $employees = DB::select('SELECT Employees.Id, Employees.Name, Employees.Surname
-                                From Employees
-                                ');
-        $patients = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname
-                                From Patients
-                                ');
+        $employees = DB::table('Employees')
+                            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+                            ->get();
+
+        $patients = DB::table('Patients')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname')
+                            ->get();
 
         return view('Base.Insurance', ['employees' => $employees, 'patients' => $patients]);
     }
@@ -160,18 +159,19 @@ class SitesController extends Controller
 
     public function CardIndexes(){
 
-        $patients = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, Patients.IsInsured
-                                From Patients
-                                ');
+        $patients = DB::table('Patients')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
+                            ->get();
 
-        $employees = DB::select('SELECT Employees.Id, Employees.Name, Employees.Surname
-                                From Employees
-                                ');
-        $treatments = DB::select('SELECT Treatments.Id, Treatments.TreatmentCategory, Treatments.UnInsurancePriceMin, 
-                                                Treatments.UnInsurancePriceMax, Treatments.InsurancePriceMin, 
-                                                Treatments.InsurancePriceMax, Treatments.Description
-                                From Treatments
-                                ');
+        $employees = DB::table('Employees')
+                            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+                            ->get();
+
+        $treatments = DB::table('Treatments')
+                            ->select('Treatments.Id', 'Treatments.TreatmentCategory', 'Treatments.UnInsurancePriceMin',
+                                'Treatments.UnInsurancePriceMax', 'Treatments.InsurancePriceMin',
+                                'Treatments.InsurancePriceMax', 'Treatments.Description')
+                            ->get();
 
         return view('Base.CardIndexes', ['employees' => $employees, 'patients' => $patients, 'treatments' => $treatments]);
     }
@@ -197,30 +197,30 @@ class SitesController extends Controller
 
     public function PatientsList(){
 
-        $patients = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, Patients.IsInsured, Patients.BirthDate, Patients.PhoneNumber
-                                FROM Patients
-                                ');
+        $patients = DB::table('Patients')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured', 'Patients.BirthDate', 'Patients.PhoneNumber')
+                            ->paginate(15);
 
         return view('profiles.list', ['patients' => $patients]);
     }
 
     public function EmployeesList(){
 
-        $employees = DB::select('SELECT Employees.Id, Employees.Name, Employees.Surname, Employees.Rank, Employees.BirthDate, Employees.PhoneNumber
-                                FROM Employees
-                                ');
+        $employees = DB::table('Employees')
+                            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber')
+                            ->paginate(15);
 
         return view('profiles.employees', ['employees' => $employees]);
     }
 
     public function Debtors(){
 
-        $debtors = DB::select('SELECT Patients.Id, Patients.Name, Patients.Surname, sum(CardIndexes.Price) as Debt
-                               FROM Patients, CardIndexes
-                               WHERE CardIndexes.PatientId = Patients.Id
-                               AND IsPaid = 0
-                               GROUP BY Patients.Id, Patients.Surname, Patients.Name
-                              ');
+        $debtors = DB::table('CardIndexes')
+                            ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('CardIndexes.Price as Debt'))
+                            ->where('CardIndexes.IsPaid', '=', 0)
+                            ->groupBy('Patients.Id', 'Patients.Surname', 'Patients.Name', 'CardIndexes.Price')
+                            ->paginate(20);
 
         return view('Base.debtors', ['debtors' => $debtors]);
     }
