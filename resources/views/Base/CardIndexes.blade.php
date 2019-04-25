@@ -4,63 +4,73 @@
 
 @section('body')
 
+    <h3 style="margin-top: 10px;" >StrefaRP - Baza SAMS > Dodaj Zabieg</h3>
     <form method="POST" action="{{route('CardIndexesDb')}}">
         {{csrf_field()}}
 
-        <div>
-            <label>Imię i Nazwisko</label>
-            <select name="PatientId">
+        <div class="form-group">
+            <label for="imie">Imię i Nazwisko</label>
+            <select name="PatientId" class="form-control" id="imie">
                 @foreach($patients as $patient)
                     <option value="{{$patient->Id}}">{{$patient->Name}} {{$patient->Surname}} || @if($patient->IsInsured == 1) Ubezpieczony @elseif($patient->IsInsured == 0) Nieubezpieczony @endif</option>
                 @endforeach
             </select>
+            <small id="imie" class="form-text text-muted">Podaj Imię i Nazwisko pacjenta, któremu wykonujesz zabieg.</small>
         </div>
-        <div>
-            <label>Przysłanie</label>
-            <input type="text" name="Annotation" placeholder="np. LSPD">
+        <div class="form-group">
+            <label for="Annotation">Przysłanie</label>
+            <input type="text" name="Annotation" class="form-control" id="Annotation" placeholder="np. LSPD">
+            <small id="imie" class="form-text text-muted">Podaj przysłanie pacjenta, jeżeli takie miało miejsce.</small>
         </div>
-        <div>
-            <label>Data Zabiegu</label>
-            <input type="date" name="Date" value="{{date("Y-m-d")}}">
+        <div class="form-group">
+            <label for="date">Data Zabiegu</label>
+            <input type="date" name="Date" class="form-control" onfocus="(this.type='date')" value="{{date("Y-m-d")}}">
+            <small id="imie" class="form-text text-muted">Podaj datę wykonania zabiegu.</small>
         </div>
-        <div>
-            <label>Osoba Nadzorująca</label>
-            <select name="PersonIssuing">
+        <div class="form-group">
+            <label for="Person">Osoba Nadzorująca</label>
+            <select name="PersonIssuing" class="form-control" id="Person">
                 @foreach($employees as $employee)
                     <option value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
                 @endforeach
             </select>
+            <small id="imie" class="form-text text-muted">Podaj osobę wykonanującą zabieg.</small>
         </div>
-        <div>
-            <label>Kategoria Zabiegu</label>
-            <select name="TreatmentCategory">
+        <div class="form-group">
+            <label for="Category">Kategoria Zabiegu</label>
+            <select name="TreatmentCategory" class="form-control" id="Category">
                 @foreach($treatments as $treatment)
                     <option value="{{$treatment->Id}}">{{$treatment->TreatmentCategory}} - {{$treatment->Description}}</option>
                 @endforeach
             </select>
+            <small id="imie" class="form-text text-muted">Podaj kategorię zabiegu.</small>
         </div>
-        <div>
-            <label>Cena</label>
-                <input type="text" name="price">
+        <div class="form-group">
+            <label for="Price">Cena</label>
+                <input type="text" name="price" class="form-control" id="Price">
             </select>
+            <small id="imie" class="form-text text-muted">Podaj koszt zabieg.</small>
         </div>
-        <div>
-            <label>Zapłacono?</label>
-            <select name="IsPaid">
+        <div class="form-group">
+            <label for="Paid">Zapłacono</label>
+            <select name="IsPaid" class="form-control" id="Paid">
                 <option value="0">Nie</option>
                 <option value="1">Tak</option>
             </select>
+            <small id="imie" class="form-text text-muted">Podaj czy osoba zapłaciła za zabieg.</small>
         </div>
-        <div>
-            <label>Rozpoznanie</label>
-                <textarea name="Recognition" cols="50">Zauważono: </textarea>
+        <div class="form-group">
+            <label for="Recognition">Rozpoznanie</label>
+                <textarea name="Recognition" class="form-control" id="Recognition">Zauważono: </textarea>
+            <small id="imie" class="form-text text-muted">Podaj Rozpoznanie pacjenta (Jakie rany, co go bolało).</small>
         </div>
-        <div>
-            <label>Zabieg</label>
-            <textarea name="Treatment" cols="50">Zrobiono: </textarea>
+        <div class="form-group">
+            <label for="Treatment">Zabieg</label>
+            <textarea name="Treatment" class="form-control" id="Treatment">Zrobiono: </textarea>
+            <small id="imie" class="form-text text-muted">Podaj działania jakie wykonałeś podczas zabiegu np. założony gips, przypisane leki raz dziennie przez tydzień.</small>
         </div>
-        <div>
-            <input type="submit" value="Dodaj Zabieg">
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Dodaj Zabieg">
         </div>
 
     </form>
