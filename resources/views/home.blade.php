@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Baza SAMS - Strona Główna')
+@section('title', 'SAMS')
 
 @section('content')
     <div class="container">
@@ -16,9 +16,8 @@
                             </div>
                         @endif
 
-                        <div class="table-responsive table-bordered">
-                            <table class="table">
-                              <thead>
+                        <div class="table-responsive">
+                            <table style="width: 100%" class="table">
                                 <tr>
                                     <th scope="col">Imie i Nazwisko</th>
                                     <th scope="col">Odesłanie</th>
@@ -26,14 +25,12 @@
                                     <th scope="col">Lekarz nadzorujacy</th>
                                     <th scope="col">Kategoria zabiegu</th>
                                     <th scope="col">Cena</th>
-                                    <th scope="col">Zapłacono?</th>
+                                    <th scope="col">Zapłacono</th>
                                     <th scope="col">Rozpoznanie</th>
                                     <th scope="col">Zabieg</th>
                                     <th scope="col">Edytuj</th>
                                     <th scope="col">Usuń</th>
                                 </tr>
-</thead>
-<tbody>
                                 @foreach($cardindexes as $card)
                                     <tr>
                                         <td><a href="{{route('user')}}?id={{$card->Id}}">{{$card->Name}} {{$card->Surname}}</a></td>
@@ -49,7 +46,6 @@
                                         <td>Usuń</td>
                                     </tr>
                                 @endforeach
-</tbody>
                             </table>
 
                             {{$cardindexes->links()}}
