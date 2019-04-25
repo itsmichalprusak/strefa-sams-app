@@ -96,5 +96,20 @@ Route::post('/cardindexes/deletes',[
     'as' => 'CardIndexDelete',
 ]);
 
+Route::post('/users/edit',[
+    'uses' => 'SitesController@UsersPatientsEdit',
+    'as' => 'UsersPatientsEdit',
+]);
+
+Route::post('/users/indexes/edit',[
+    'uses' => 'SitesController@UserCardIndexUpdate',
+    'as' => 'UserCardIndexUpdate',
+]);
+
+Route::post('/users/indexes/delete',[
+    'uses' => 'SitesController@UserCardIndexDelete',
+    'as' => 'UserCardIndexDelete',
+]);
+
 
 Auth::routes();
