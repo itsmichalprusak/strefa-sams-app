@@ -4,7 +4,7 @@
 
 @section('body')
 
-    <h4 style="margin-top: 10px;" >Baza SAMS > Dodaj Pracownika</h1>
+    <h3 style="margin-top: 10px;" >StrefaRP - Baza SAMS > Dodaj Pracownika</h3>
 
     <form method="POST" action="{{route('addemployee')}}">
         {{csrf_field()}}
