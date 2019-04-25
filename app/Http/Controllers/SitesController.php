@@ -61,6 +61,7 @@ class SitesController extends Controller
                             ->join('Employees', 'Employees.Id', '=', 'Insurances.PersonIssuing')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Insurances.InsuranceAmount',
                                 'Insurances.InsuranceDate', 'Employees.Name as emName', 'Employees.Surname as emSurname')
+                            ->orderByDesc('Insurances.InsuranceDate')
                             ->paginate(10);
 
         return view('Insurances.list', ['insurances' => $insurances]);
@@ -75,21 +76,22 @@ class SitesController extends Controller
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Employees.Id as emId', 'Employees.Name as emName',
                                 'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'Treatments.Id as TreatmentId', 'CardIndexes.Id as CardId', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
                                 'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
+                            ->orderByDesc('CardIndexes.Date')
                             ->paginate(10);
 
         $patients = DB::table('Patients')
-            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
-            ->get();
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
+                            ->get();
 
         $employees = DB::table('Employees')
-            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
-            ->get();
+                            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+                            ->get();
 
         $treatments = DB::table('Treatments')
-            ->select('Treatments.Id', 'Treatments.TreatmentCategory', 'Treatments.UnInsurancePriceMin',
-                'Treatments.UnInsurancePriceMax', 'Treatments.InsurancePriceMin',
-                'Treatments.InsurancePriceMax', 'Treatments.Description')
-            ->get();
+                            ->select('Treatments.Id', 'Treatments.TreatmentCategory', 'Treatments.UnInsurancePriceMin',
+                                'Treatments.UnInsurancePriceMax', 'Treatments.InsurancePriceMin',
+                                'Treatments.InsurancePriceMax', 'Treatments.Description')
+                            ->get();
 
         return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments]);
     }
@@ -258,6 +260,17 @@ class SitesController extends Controller
                             ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
                             ->where('CardIndexes.Id', '=', $CardId)
                             ->update($data);
+
+        return redirect(Route('home'));
+    }
+
+    public function CardIndexDelete(Request $req){
+
+        $CardIndexesId = $req->input('CardIndexesId');
+
+        DB::table('CardIndexes')
+            ->where('CardIndexes.Id', '=', $CardIndexesId)
+            ->delete();
 
         return redirect(Route('home'));
     }
