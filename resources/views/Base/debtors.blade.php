@@ -5,8 +5,8 @@
 @section('content')
 
     <div class="table-responsive">
-        <input type="text" id="Input" onkeyup="SearchByName()" class="form-control" placeholder="Szukaj po imieniu">
-        <table id="table" class="table" width="100%">
+        <input type="text" id="Input" onkeyup="SearchByName()" class="form-control bg-dark text-white" placeholder="Szukaj po imieniu">
+        <table id="table" class="table table-dark bg-dark table-bordered" width="100%">
             <tr>
                 <th>Imię i Nazwisko</th>
                 <th>Kwota zadłużenia</th>
