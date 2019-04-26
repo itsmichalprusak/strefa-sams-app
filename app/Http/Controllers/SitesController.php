@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,12 @@ class SitesController extends Controller
     }
 
     public function add(){
-        return view('Base.Add');
+
+        $employees = DB::table('Employees')
+                            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+                            ->get();
+
+        return view('Base.Add', ['employees' => $employees]);
     }
 
     public function addemployee(Request $req){
@@ -29,8 +35,9 @@ class SitesController extends Controller
         $rank = $req->input('rank');
         $BirthDate = $req->input('date');
         $PhoneNumber = $req->input('phonenumber');
+        $UnderSupervision = $req->input('UnderSupervision');
 
-        $data = array('Name' => $name, 'Surname' => $surname, 'Rank' => $rank, 'BirthDate' => $BirthDate, 'PhoneNumber' => $PhoneNumber);
+        $data = array('Name' => $name, 'Surname' => $surname, 'Rank' => $rank, 'BirthDate' => $BirthDate, 'PhoneNumber' => $PhoneNumber, 'UnderSupervision' => $UnderSupervision);
 
         DB::table('Employees') -> insert($data);
 
@@ -59,12 +66,20 @@ class SitesController extends Controller
         $insurances = DB::table('Insurances')
                             ->join('Patients', 'Patients.Id', '=', 'Insurances.PatientId')
                             ->join('Employees', 'Employees.Id', '=', 'Insurances.PersonIssuing')
-                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Insurances.InsuranceAmount',
-                                'Insurances.InsuranceDate', 'Employees.Name as emName', 'Employees.Surname as emSurname')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Insurances.InsuranceAmount', 'Insurances.Id as InId',
+                                'Insurances.InsuranceDate', 'Employees.Id as emId', 'Employees.Name as emName', 'Employees.Surname as emSurname')
                             ->orderByDesc('Insurances.InsuranceDate')
                             ->paginate(10);
 
-        return view('Insurances.list', ['insurances' => $insurances]);
+        $patients = DB::table('Patients')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
+                            ->get();
+
+        $employees = DB::table('Employees')
+                            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+                            ->get();
+
+        return view('Insurances.list', ['insurances' => $insurances, 'patients' => $patients, 'employees' => $employees]);
     }
 
     public function home(){
@@ -109,14 +124,24 @@ class SitesController extends Controller
                             ->get();
 
         $employees = DB::table('Employees')
-                            ->select('Employees.Name', 'Employees.Surname', 'Employees.LastPromotion',
+                            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.LastPromotion',
                                         'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber', 'Employees.UnderSupervision')
+                            ->where('Employees.Id', '=', $emid)
+                            ->get();
+
+        $supervision = DB::table('Employees')
+                            ->select('Employees.Name', 'Employees.Surname')
+                            ->where('Employees.UnderSupervision', '=', 'Employees.Id')
                             ->where('Employees.Id', '=', $emid)
                             ->get();
 
         $employeestwo = DB::table('Employees')
                             ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.LastPromotion',
                                 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber', 'Employees.UnderSupervision')
+                            ->get();
+
+        $patientstwo = DB::table('Patients')
+                            ->select('Patients.*')
                             ->get();
 
         $treatments = DB::table('Treatments')
@@ -141,14 +166,14 @@ class SitesController extends Controller
                             ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
                             ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
                             ->join('Treatments', 'Treatments.Id', '=', 'CardIndexes.TreatmentCategoryId')
-                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'CardIndexes.Annotation',
-                                            'CardIndexes.Date', 'Treatments.TreatmentCategory', 'Treatments.Description', 'CardIndexes.Price',
-                                            'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'CardIndexes.Annotation', 'CardIndexes.Id as CardId',
+                                            'CardIndexes.Date', 'Treatments.TreatmentCategory', 'Treatments.Description', 'CardIndexes.Price', 'Employees.Id as emId',
+                                            'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment', 'Treatments.Id as TreatmentId')
                             ->where('CardIndexes.SupervisingDoctor', '=', $emid)
                             ->orderByDesc('CardIndexes.Date')
                             ->paginate(10);
 
-        return view('profiles.user', ['patients'=>$patients, 'id'=>$id, 'emid'=>$emid, 'employees'=>$employees, 'cardindexes'=>$cardindexes, 'cards' => $cards, 'treatments' => $treatments, 'employeestwo' => $employeestwo]);
+        return view('profiles.user', ['patients'=>$patients, 'id'=>$id, 'emid'=>$emid, 'employees'=>$employees, 'cardindexes'=>$cardindexes, 'cards' => $cards, 'treatments' => $treatments, 'employeestwo' => $employeestwo, 'patientstwo' => $patientstwo, 'supervision' => $supervision]);
     }
 
     public function patient(){
@@ -340,6 +365,85 @@ class SitesController extends Controller
                             ->delete();
 
         return redirect(Route('home'));
+    }
+
+    public function UserEditEmployee(Request $req){
+
+        $id = $req->input('EmployeeId');
+        $name = $req->input('name');
+        $surname = $req->input('surname');
+        $rank = $req->input('rank');
+        $date = $req->input('date');
+        $phonenumber = $req->input('phonenumber');
+
+        $data = array('Name' => $name, 'Surname' => $surname, 'Rank' => $rank, 'BirthDate' => $date, 'PhoneNumber' => $phonenumber);
+
+        DB::table('Employees')
+                            ->where('Employees.Id', '=', $id)
+                            ->update($data);
+
+        return redirect(Route('home'));
+    }
+
+    public function UserEditEmployeeTwo(Request $req){
+
+        $id = $req->input('CardId');
+        $PatientId = $req->input('PatientId');
+        $Annotation = $req->input('Annotation');
+        $Date = $req->input('Date');
+        $PersonIssuing = $req->input('PersonIssuing');
+        $TreatmentCategory = $req->input('TreatmentCategory');
+        $price = $req->input('price');
+        $IsPaid = $req->input('IsPaid');
+        $Recognition = $req->input('Recognition');
+        $Treatment = $req->input('Treatment');
+
+        $data = array('PatientId' => $PatientId, 'Annotation' => $Annotation, 'Date' => $Date, 'SupervisingDoctor' => $PersonIssuing, 'Price' => $price, 'IsPaid' => $IsPaid, 'TreatmentCategoryId' => $TreatmentCategory, 'Recognition' => $Recognition, 'Treatment' => $Treatment);
+
+        DB::table('CardIndexes')
+                            ->where('CardIndexes.Id', '=', $id)
+                            ->update($data);
+
+        return redirect(Route('home'));
+    }
+
+    public function UserEmployeeFormTwoDelete(Request $req){
+
+        $id = $req->input('CardIndexesId');
+
+        DB::table('CardIndexes')
+                            ->where('CardIndexes.Id', '=', $id)
+                            ->delete();
+
+        return redirect(Route('home'));
+    }
+
+    public function EditInsurance(Request $req){
+
+        $id = $req->input('id');
+        $PatientId = $req->input('PatientId');
+        $InsurancePrice = $req->input('InsurancePrice');
+        $Date = $req->input('Date');
+        $PersonIssuing = $req->input('PersonIssuing');
+
+        $data = array('PatientId' => $PatientId, 'InsuranceAmount' => $InsurancePrice, 'InsuranceDate' => $Date, 'PersonIssuing' => $PersonIssuing);
+
+        DB::table('Insurances')
+                            ->where('Insurances.Id', '=', $id)
+                            ->update($data);
+
+        return redirect(Route('insurance'));
+    }
+
+    public function DeleteInsurance(Request $req){
+
+        $id = $req->input('InsuranceId');
+
+        DB::table('Insurances')
+                            ->where('Insurances.Id', '=', $id)
+                            ->delete();
+
+        return redirect(Route('insurance'));
     }
 
 }
