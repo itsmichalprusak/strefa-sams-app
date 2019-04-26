@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <label for="imie">Imię i Nazwisko</label>
-            <select class="form-control" name="PatientId" id="imie">
+            <select required class="form-control bg-dark text-white" name="PatientId" id="imie">
                 @foreach($patients as $patient)
                     <option value="{{$patient->Id}}">{{$patient->Name}} {{$patient->Surname}}</option>
                 @endforeach
@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="price">Kwota</label>
-            <select class="form-control" name="InsurancePrice" id="price">
+            <select required class="form-control bg-dark text-white" name="InsurancePrice" id="price">
                 <option value="800">800</option>
                 <option value="1300">1300</option>
                 <option value="2200">2200</option>
@@ -29,12 +29,12 @@
         </div>
         <div class="form-group">
             <label for="date">Data Dodania</label>
-            <input type="date" name="Date"  class="form-control" id="date" onfocus="(this.type='date')" value="{{date("Y-m-d")}}">
+            <input required type="date" name="Date"  class="form-control bg-dark text-white" id="date" onfocus="(this.type='date')" value="{{date("Y-m-d")}}">
             <small id="date" class="form-text text-muted">Podaj Datę utworzenia wpisu ubezpieczenia.</small>
         </div>
         <div class="form-group">
             <label for="Employee">Osoba Dodająca</label>
-            <select class="form-control" name="PersonIssuing" id="Employee">
+            <select required class="form-control bg-dark text-white" name="PersonIssuing" id="Employee">
                 @foreach($employees as $employee)
                     <option value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
                 @endforeach
