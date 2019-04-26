@@ -72,9 +72,12 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right bg-dark text-white" aria-labelledby="navbarDropdown">
+                                        @if(Auth::guest())
+                                        @else
                                         @if(Auth::user()->name == 'allahaka' or Auth::user()->name == 'KaMisia' or Auth::user()->name == 'Dr_krawix')
                                             <a data-toggle="modal" data-target="#AddAccount" class="dropdown-item text-white">Dodaj konto</a>
-                                        @endif('')
+                                        @endif()
+                                        @endif()
                                         <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -98,47 +101,51 @@
                 @yield('body')
                 @yield('content')
 
-                <div class="modal fade" id="AddAccount" tabindex="-1" role="dialog" aria-labelledby="DelCenter" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content bg-dark">
-                            <div class="modal-header bg-dark">
-                                <h3 class="modal-title" id="DelTitle">Usuwanie ubezpieczenia</h3>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="POST" action="{{ route('AddAccount') }}">
-                                    @csrf
-                                    <div class="form-group row">
-                                        <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Login') }}</label>
-                                        <div class="col-md-6">
-                                            <input id="name" type="name" class="bg-dark text-white form-control" name="login" required>
-                                        </div>
+                @if(Auth::guest())
+                @else
+                    @if(Auth::user()->name == 'allahaka' or Auth::user()->name == 'KaMisia' or Auth::user()->name == 'Dr_krawix')
+                        <div class="modal fade" id="AddAccount" tabindex="-1" role="dialog" aria-labelledby="DelCenter" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content bg-dark">
+                                    <div class="modal-header bg-dark">
+                                        <h3 class="modal-title" id="DelTitle">Dodaj konto</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action="{{ route('AddAccount') }}">
+                                            @csrf
+                                            <div class="form-group row">
+                                                <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Login') }}</label>
+                                                <div class="col-md-6">
+                                                    <input id="name" type="name" class="bg-dark text-white form-control" name="login" required>
+                                                </div>
+                                            </div>
 
-                                    <div class="form-group row">
-                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="bg-dark text-white form-control" name="password" required>
-                                        </div>
-                                    </div>
+                                            <div class="form-group row">
+                                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                                <div class="col-md-6">
+                                                    <input id="password" type="password" class="bg-dark text-white form-control" name="password" required>
+                                                </div>
+                                            </div>
 
-                                    <div class="form-group row mb-0">
-                                        <div class="col-md-8 offset-md-4">
-                                            <button type="submit" class="btn btn-secondary">
-                                                Dodaj konto
-                                            </button>
-                                        </div>
+                                            <div class="form-group row mb-0">
+                                                <div class="col-md-8 offset-md-4">
+                                                    <button type="submit" class="btn btn-secondary">
+                                                        Dodaj konto
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    @endif()
+                @endif()
 
             </div>
-
         </div>
     </body>
 </html>
