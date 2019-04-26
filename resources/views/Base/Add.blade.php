@@ -11,34 +11,43 @@
 
         <div class="form-group">
             <label for="imie">Imię</label>
-            <input type="name" class="form-control" id="imie" aria-describedby="firstname" name="name" placeholder="Imię Lekarza">
+            <input required type="name" class="form-control bg-dark text-white" id="imie" aria-describedby="firstname" name="name" placeholder="Imię Lekarza">
             <small id="firstname" class="form-text text-muted">Podaj imię pracownika, którego chcesz dodać do bazy.</small>
         </div>
         <div class="form-group">
             <label for="nazwisko">Nazwisko</label>
-            <input type="name" name="surname" class="form-control" id="nazwisko" placeholder="Nazwisko Lekarza">
+            <input required type="name" name="surname" class="form-control bg-dark text-white" id="nazwisko" placeholder="Nazwisko Lekarza">
             <small id="surname" class="form-text text-muted">Podaj nazwisko pracownika, którego chcesz dodać do bazy.</small>
         </div>
         <div class="form-group">
             <label for="ranga">Ranga</label>
-            <select class="form-control" name="rank" id="stopien">
+            <select required class="form-control bg-dark text-white" name="rank" id="stopien">
                 <option value="Szef SAMS">Szef SAMS</option>
                 <option value="Dyrektor">Dyrektor</option>
                 <option value="Lekarz ratownictwa medycznego">Lekarz ratownictwa medycznego</option>
                 <option value="Ratownik Medyczny">Ratownik Medyczny</option>
-                <option value="Szef SAMS">Pielęgniarz</option>
+                <option value="Pielęgniarz">Pielęgniarz</option>
             </select>
             <small id="stopien" class="form-text text-muted">Podaj stopień pracownika, którego chcesz dodać do bazy.</small>
         </div>
         <div class="form-group">
             <label for="dataurodzenia">Data urodzin</label>
-            <input type="date" name="date" class="form-control" id="dataurodzenia" onfocus="(this.type='date')">
+            <input type="date" name="date" class="form-control bg-dark text-white" id="dataurodzenia" onfocus="(this.type='date')">
             <small id="surname" class="form-text text-muted">Podaj datę urodzenia pracownika, którego chcesz dodać do bazy.</small>
         </div>
         <div class="form-group">
-            <label for="nazwisko">Numer telefonu</label>
-            <input type="phone" name="phonenumber" class="form-control" id="telefon" placeholder="Numer Telefonu">
+            <label for="telefon">Numer telefonu</label>
+            <input required type="phone" name="phonenumber" class="form-control bg-dark text-white" id="telefon" placeholder="Numer Telefonu">
             <small id="surname" class="form-text text-muted">Podaj numer telefonu pracownika, którego chcesz dodać do bazy.</small>
+        </div>
+        <div class="form-group">
+            <label for="przydzial">Osoba nadzorująca</label>
+            <select class="form-control bg-dark text-white" name="UnderSupervision" id="Employee">
+                @foreach($employees as $employee)
+                    <option value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
+                @endforeach
+            </select>
+            <small id="przydzial" class="form-text text-muted">Podaj osobę nadzorującą pracownika, którego chcesz dodać do bazy.</small>
         </div>
         <div>
             <button type="submit" class="btn btn-primary">Dodaj pracownika!</button>
