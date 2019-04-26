@@ -111,5 +111,30 @@ Route::post('/users/indexes/delete',[
     'as' => 'UserCardIndexDelete',
 ]);
 
+Route::post('/user/employees/edit',[
+    'uses' => 'SitesController@UserEditEmployee',
+    'as' => 'UserEditEmployee',
+]);
+
+Route::post('/users/employees/index/edit',[
+    'uses' => 'SitesController@UserEditEmployeeTwo',
+    'as' => 'UserEditEmployeeTwo',
+]);
+
+Route::post('/users/employees/index/delete',[
+    'uses' => 'SitesController@UserEmployeeFormTwoDelete',
+    'as' => 'UserEmployeeFormTwoDelete',
+]);
+
+Route::post('/insurance/edit',[
+    'uses' => 'SitesController@EditInsurance',
+    'as' => 'EditInsurance',
+]);
+
+Route::post('/insurance/delete',[
+    'uses' => 'SitesController@DeleteInsurance',
+    'as' => 'DeleteInsurance',
+]);
+
 
 Auth::routes();
