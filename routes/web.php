@@ -136,5 +136,10 @@ Route::post('/insurance/delete',[
     'as' => 'DeleteInsurance',
 ]);
 
+Route::post('/addaccount',[
+    'uses' => 'SitesController@AddAccount',
+    'as' => 'AddAccount'
+]);
+
 
 Auth::routes();
