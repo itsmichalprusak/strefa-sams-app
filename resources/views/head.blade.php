@@ -15,64 +15,64 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
-    <body>
+    <body class="bg-dark text-white">
         <div id="app">
 
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-dark text-white">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand text-white" href="{{ url('/') }}">
                         SAMS
                     </a>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse bg-dark" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
+                        <ul class="navbar-nav mr-auto bg-dark">
 
                         </ul>
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ml-auto bg-dark">
                             <!-- Authentication Links -->
                             @if(Auth::guest())
                             @else
-                            <div class="nav-item">
-                                <a class="nav-link" href="{{Route('home')}}">Ostatnie wpisy</a>
+                            <div class="nav-item bg-dark text-white">
+                                <a class="nav-link text-white" href="{{Route('home')}}">Ostatnie wpisy</a>
                             </div>
-                            <div class="nav-item dropdown">
-                                <div class="nav-link btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Listy<span class="caret"></span></div>
-                                <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="{{Route('insurance')}}">Lista ubezpieczonych</a></li>
-                                    <li><a class="nav-link" href="{{Route('Debtors')}}">Lista dłużników</a></li>
-                                    <li><a class="nav-link" href="{{Route('PatientsList')}}">Lista pacjentów</a></li>
-                                    <li><a class="nav-link" href="{{Route('EmployeesList')}}">Lista pracowników</a></li>
+                            <div class="nav-item dropdown bg-dark">
+                                <div class="nav-link btn btn-default dropdown-toggle bg-dark text-white" data-toggle="dropdown" data-hover="dropdown">Listy<span class="caret"></span></div>
+                                <ul class="dropdown-menu bg-dark">
+                                    <li><a class="nav-link text-white" href="{{Route('insurance')}}">Lista ubezpieczonych</a></li>
+                                    <li><a class="nav-link text-white" href="{{Route('Debtors')}}">Lista dłużników</a></li>
+                                    <li><a class="nav-link text-white" href="{{Route('PatientsList')}}">Lista pacjentów</a></li>
+                                    <li><a class="nav-link text-white" href="{{Route('EmployeesList')}}">Lista pracowników</a></li>
                                 </ul>
                             </div>
-                            <div class="nav-item dropdown">
-                                <div class="nav-link btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Dodania<span class="caret"></span></div>
-                                <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="{{Route('CardIndexes')}}">Dodaj Zabieg</a></li>
-                                    <li><a class="nav-link" href="{{Route('addInsurance')}}">Dodaj ubezpieczenie</a></li>
-                                    <li><a class="nav-link" href="{{Route('patient')}}">Dodaj Pacjenta SAMS</a></li>
-                                    <li><a class="nav-link" href="{{Route('add')}}">Dodaj Pracownika SAMS</a></li>
+                            <div class="nav-item dropdown bg-dark">
+                                <div class="nav-link btn btn-default dropdown-toggle bg-dark text-white" data-toggle="dropdown" data-hover="dropdown">Dodania<span class="caret"></span></div>
+                                <ul class="dropdown-menu bg-dark text-white">
+                                    <li><a class="nav-link text-white" href="{{Route('CardIndexes')}}">Dodaj Zabieg</a></li>
+                                    <li><a class="nav-link text-white" href="{{Route('addInsurance')}}">Dodaj ubezpieczenie</a></li>
+                                    <li><a class="nav-link text-white" href="{{Route('patient')}}">Dodaj Pacjenta SAMS</a></li>
+                                    <li><a class="nav-link text-white" href="{{Route('add')}}">Dodaj Pracownika SAMS</a></li>
                                 </ul>
                             </div>
                             @endif
                             @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li class="nav-item bg-dark text-white">
+                                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <li class="nav-item dropdown bg-dark text-white">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark text-white" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
@@ -90,7 +90,7 @@
                 </div>
             </nav>
 
-            <div class="container">
+            <div class="container bg-dark">
 
                 @yield('body')
                 @yield('content')
