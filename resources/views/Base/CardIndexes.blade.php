@@ -10,26 +10,26 @@
 
         <div class="form-group">
             <label for="imie">Imię i Nazwisko</label>
-            <select name="PatientId" class="form-control" id="imie">
+            <select required name="PatientId" class="form-control bg-dark text-white" id="imie">
                 @foreach($patients as $patient)
                     <option value="{{$patient->Id}}">{{$patient->Name}} {{$patient->Surname}} || @if($patient->IsInsured == 1) Ubezpieczony @elseif($patient->IsInsured == 0) Nieubezpieczony @endif</option>
                 @endforeach
             </select>
-            <small id="imie" class="form-text text-muted">Podaj Imię i Nazwisko pacjenta, któremu wykonujesz zabieg.</small>
+            <small id="imie" class="form-text text-muted ">Podaj Imię i Nazwisko pacjenta, któremu wykonujesz zabieg.</small>
         </div>
         <div class="form-group">
             <label for="Annotation">Przysłanie</label>
-            <input type="text" name="Annotation" class="form-control" id="Annotation" placeholder="np. LSPD">
+            <input type="text" name="Annotation" class="form-control bg-dark text-white" id="Annotation" placeholder="np. LSPD">
             <small id="imie" class="form-text text-muted">Podaj przysłanie pacjenta, jeżeli takie miało miejsce.</small>
         </div>
         <div class="form-group">
             <label for="date">Data Zabiegu</label>
-            <input type="date" name="Date" class="form-control" onfocus="(this.type='date')" value="{{date("Y-m-d")}}">
+            <input required type="date" name="Date" class="form-control bg-dark text-white" onfocus="(this.type='date')" value="{{date("Y-m-d")}}">
             <small id="imie" class="form-text text-muted">Podaj datę wykonania zabiegu.</small>
         </div>
         <div class="form-group">
             <label for="Person">Osoba Nadzorująca</label>
-            <select name="PersonIssuing" class="form-control" id="Person">
+            <select required name="PersonIssuing" class="form-control bg-dark text-white" id="Person">
                 @foreach($employees as $employee)
                     <option value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
                 @endforeach
@@ -38,7 +38,7 @@
         </div>
         <div class="form-group">
             <label for="Category">Kategoria Zabiegu</label>
-            <select name="TreatmentCategory" class="form-control" id="Category">
+            <select required name="TreatmentCategory" class="form-control bg-dark text-white" id="Category">
                 @foreach($treatments as $treatment)
                     <option value="{{$treatment->Id}}">{{$treatment->TreatmentCategory}} - {{$treatment->Description}}</option>
                 @endforeach
@@ -47,13 +47,12 @@
         </div>
         <div class="form-group">
             <label for="Price">Cena</label>
-                <input type="text" name="price" class="form-control" id="Price">
-            </select>
+                <input required type="text" name="price" class="form-control bg-dark text-white" id="Price">
             <small id="imie" class="form-text text-muted">Podaj koszt zabieg.</small>
         </div>
         <div class="form-group">
             <label for="Paid">Zapłacono</label>
-            <select name="IsPaid" class="form-control" id="Paid">
+            <select name="IsPaid" class="form-control bg-dark text-white" id="Paid">
                 <option value="0">Nie</option>
                 <option value="1">Tak</option>
             </select>
@@ -61,12 +60,12 @@
         </div>
         <div class="form-group">
             <label for="Recognition">Rozpoznanie</label>
-                <textarea name="Recognition" class="form-control" id="Recognition">Zauważono: </textarea>
+                <textarea required name="Recognition" class="form-control bg-dark text-white" id="Recognition" placeholder="Rozpoznanie:"> </textarea>
             <small id="imie" class="form-text text-muted">Podaj Rozpoznanie pacjenta (Jakie rany, co go bolało).</small>
         </div>
         <div class="form-group">
             <label for="Treatment">Zabieg</label>
-            <textarea name="Treatment" class="form-control" id="Treatment">Zrobiono: </textarea>
+                <textarea required name="Treatment" class="form-control bg-dark text-white" id="Treatment" placeholder="Leczenie:"> </textarea>
             <small id="imie" class="form-text text-muted">Podaj działania jakie wykonałeś podczas zabiegu np. założony gips, przypisane leki raz dziennie przez tydzień.</small>
         </div>
         <div class="form-group">
