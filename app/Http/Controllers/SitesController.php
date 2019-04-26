@@ -446,4 +446,17 @@ class SitesController extends Controller
         return redirect(Route('insurance'));
     }
 
+    public function AddAccount(Request $req){
+
+        $nick = $req->input('login');
+        $password = bcrypt($req->input('password'));
+
+        $data = array('name' => $nick, 'email' => $nick, 'password' => $password);
+
+        DB::table('users')
+                            ->insert($data);
+
+        return redirect(Route('home'));
+    }
+
 }
