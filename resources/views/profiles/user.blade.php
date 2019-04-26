@@ -4,11 +4,11 @@
 
 @section('content')
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
+    <div class="container bg-dark text-white">
+        <div class="row justify-content-center bg-dark text-white">
+            <div class="col-md-12 bg-dark text-white">
+                <div class="card bg-dark text-white">
+                    <div class="card-header bg-dark text-white">
                         @if($id)
                             O Pacjencie
                         @elseif($emid)
@@ -17,7 +17,7 @@
                     </div>
 
                     @if($id)
-                    <table style="width: 100%">
+                    <table class="table table-dark bg-dark table-bordered">
                     <tr>
                         <th>Imie i Nazwisko</th>
                         <th>Data Urodzenia</th>
@@ -37,12 +37,12 @@
                             <td>{{$user->Comments}}</td>
                             <td>{{$user->BloodGroup}}</td>
                             <td>{{$user->Email}}</td>
-                            <td><button class="btn" data-toggle="modal" data-target="#FormEdit{{$user->Id}}">Edytuj</button></td>
+                            <td><button class="btn btn-dark" data-toggle="modal" data-target="#FormEdit{{$user->Id}}">Edytuj</button></td>
                         </tr>
                     @endforeach
                     </table>
                         <br><br><h2>Ostatnie wpisy o pacjencie</h2><br><br>
-                    <table style="width: 100%">
+                    <table class="table table-dark bg-dark table-bordered">
                         <tr>
                             <th>Imie i Nazwisko</th>
                             <th>Odesłanie</th>
@@ -67,15 +67,15 @@
                                 <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                 <td>{{$card->Recognition}}</td>
                                 <td>{{$card->Treatment}}</td>
-                                <td><button class="btn" data-toggle="modal" data-target="#FormEditd{{$card->CardId}}">Edytuj</button></td>
-                                <td><button class="btn" data-toggle="modal" data-target="#FormEditdel{{$card->CardId}}">Usuń</button></td>
+                                <td><button class="btn btn-dark" data-toggle="modal" data-target="#FormEditd{{$card->CardId}}">Edytuj</button></td>
+                                <td><button class="btn btn-dark" data-toggle="modal" data-target="#FormEditdel{{$card->CardId}}">Usuń</button></td>
                             </tr>
                         @endforeach
                         </table>
                         {{$cardindexes->links()}}
 
                     @elseif($emid)
-                        <table style="width: 100%">
+                        <table class="table table-dark bg-dark table-bordered">
                             <tr>
                                 <th>Imie i Nazwisko</th>
                                 <th>Data ostatniego awansu</th>
@@ -92,24 +92,24 @@
                                     <td>{{$employee->Rank}}</td>
                                     <td>{{$employee->BirthDate}}</td>
                                     <td>{{$employee->PhoneNumber}}</td>
-                                    <td><a href="{{route('user')}}?emId={{$employee->UnderSupervision}}">{{$employee->UnderSupervision}}</a></td>
-                                    <td>Edytuj</td>
+                                    <td> @if($employee->UnderSupervision) <a href="{{route('user')}}?emId={{$employee->UnderSupervision}}">  Profil Osoby Nadzorującej  </a> @endif </td>
+                                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#UserEmployeeForm{{$employee->Id}}">Edytuj</button></td>
                                 </tr>
                             @endforeach
                         </table>
                         <br><br><br>
-                        <table style="width: 100%">
+                        <table class="table table-dark bg-dark table-bordered">
                             <tr>
-                                <th>Imie i Nazwisko</th>
-                                <th>Odesłanie</th>
-                                <th>Data</th>
-                                <th>Kategoria Zabiegu</th>
-                                <th>Cena</th>
-                                <th>Zapłacono</th>
-                                <th>Rozpoznanie</th>
-                                <th>Zabieg</th>
-                                <th>Edytuj</th>
-                                <th>Usuń</th>
+                                <th scope="col">Imie i Nazwisko</th>
+                                <th scope="col">Odesłanie</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Kategoria Zabiegu</th>
+                                <th scope="col">Cena</th>
+                                <th scope="col">Zapłacono</th>
+                                <th scope="col">Rozpoznanie</th>
+                                <th scope="col">Zabieg</th>
+                                <th scope="col">Edytuj</th>
+                                <th scope="col">Usuń</th>
                             </tr>
                             @foreach ($cards as $card)
                                 <tr>
@@ -118,11 +118,11 @@
                                     <td>{{$card->Date}}</td>
                                     <td>{{$card->TreatmentCategory}} | {{$card->Description}}</td>
                                     <td>{{$card->Price}}</td>
-                                    <td>{{$card->IsPaid}}</td>
+                                    <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                     <td>{{$card->Recognition}}</td>
                                     <td>{{$card->Treatment}}</td>
-                                    <td>Edytuj</td>
-                                    <td>Usuń</td>
+                                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#UserEmployeeFormTwo{{$card->CardId}}">Edytuj</button></td>
+                                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#UserEmployeeFormTwoDelete{{$card->CardId}}">Usuń</button></td>
                                 </tr>
                             @endforeach
                         </table>
