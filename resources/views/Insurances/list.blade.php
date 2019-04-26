@@ -5,8 +5,8 @@
 @section('content')
 
     <div class="table-responsive">
-        <input type="text" id="Input" onkeyup="SearchByName()" class="form-control" placeholder="Szukaj po imieniu">
-        <table style="width: 100%" id="table" class="table">
+        <input type="text" id="Input" onkeyup="SearchByName()" class="form-control bg-dark text-white" placeholder="Szukaj po imieniu">
+        <table style="width: 100%" id="table" class="table table-dark bg-dark table-bordered">
             <tr>
                 <th scope="col">Imie i Nazwisko</th>
                 <th scope="col">Kwota Ubezpieczenia</th>
@@ -23,7 +23,7 @@
                     <td><a href="{{route('user')}}?id={{$insurance->Id}}">{{$insurance->Name}} {{$insurance->Surname}}</a></td>
                     <td>@if($insurance->InsuranceAmount == 9999) 0 | Służba @else {{$insurance->InsuranceAmount}} @endif</td>
                     <td>{{$insurance->InsuranceDate}}</td>
-                    <td>{{$insurance->emName}} {{$insurance->emSurname}}</td>
+                    <td><a href="{{route('user')}}?emId={{$insurance->emId}}">{{$insurance->emName}} {{$insurance->emSurname}}</a></td>
                     <td>
                         @if($insurance->InsuranceAmount == 800)
                             {{$date1 = date('Y-m-d', strtotime("+7 day",strtotime($insurance->InsuranceDate)))}}
@@ -46,11 +46,14 @@
                             Nigdy | Służby porządkowe
                         @endif
                     </td>
-                    <td>Edytuj</td>
-                    <td>Usuń</td>
+                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#InsuranceEdit{{$insurance->InId}}">Edytuj</button></td>
+                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#DeleteInsurance{{$insurance->InId}}">Usuń</button></td>
                 </tr>
             @endforeach
         </table>
+
+        @include('popup.list')
+
         {{$insurances->links()}}
     </div>
 
