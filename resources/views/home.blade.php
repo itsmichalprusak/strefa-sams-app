@@ -3,20 +3,20 @@
 @section('title', 'SAMS')
 
 @section('content')
-    <div class="container">
+    <div class="container bg-dark">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Ostatnie Wpisy</div>
+                <div class="card bg-dark">
+                    <div class="card-header bg-dark">Ostatnie Wpisy</div>
 
-                    <div class="card-body">
+                    <div class="card-body bg-dark">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
 
-                        <div class="table-responsive">
+                        <div class="table-responsive bg-dark table-dark">
                             <table style="width: 100%" class="table">
                                 <tr>
                                     <th scope="col">Imie i Nazwisko</th>
@@ -42,8 +42,8 @@
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                         <td>{{$card->Recognition}}</td>
                                         <td>{{$card->Treatment}}</td>
-                                        <td><button class="btn" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</button></td>
-                                        <td><button class="btn" data-toggle="modal" data-target="#Formd{{$card->CardId}}">Usuń</button></td>
+                                        <td><button class="btn btn-dark" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</button></td>
+                                        <td><button class="btn btn-dark" data-toggle="modal" data-target="#Formd{{$card->CardId}}">Usuń</button></td>
                                     </tr>
                                 @endforeach
 
@@ -56,7 +56,6 @@
                             {{$cardindexes->links()}}
 
                         </div>
-
                     </div>
                 </div>
             </div>
