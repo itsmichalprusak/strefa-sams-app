@@ -37,20 +37,20 @@
                             <td>{{$user->Comments}}</td>
                             <td>{{$user->BloodGroup}}</td>
                             <td>{{$user->Email}}</td>
-                            <td><button class="btn btn-dark" data-toggle="modal" data-target="#FormEdit{{$user->Id}}">Edytuj</button></td>
+                            <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEdit{{$user->Id}}">Edytuj</button></td>
                         </tr>
                     @endforeach
                     </table>
                         <br><br><h2>Ostatnie wpisy o pacjencie</h2><br><br>
-                    <table class="table table-dark bg-dark table-bordered">
+                    <table id="table" class="table table-dark bg-dark table-bordered">
                         <tr>
                             <th>Imie i Nazwisko</th>
-                            <th>Odesłanie</th>
-                            <th>Data</th>
-                            <th>Lekarz Nadzorujący</th>
-                            <th>Kategoria zabiegu</th>
-                            <th>Cena</th>
-                            <th>Zapłacono</th>
+                            <th onclick="sortTable(1)" style="cursor:pointer">Odesłanie</th>
+                            <th onclick="sortTable(2)" style="cursor:pointer">Data</th>
+                            <th onclick="sortTable(3)" style="cursor:pointer">Lekarz Nadzorujący</th>
+                            <th onclick="sortTable(4)" style="cursor:pointer">Kategoria zabiegu</th>
+                            <th onclick="sortTable(5)" style="cursor:pointer">Cena</th>
+                            <th onclick="sortTable(6)" style="cursor:pointer">Zapłacono</th>
                             <th>Rozpoznanie</th>
                             <th>Zabieg</th>
                             <th>Edytuj</th>
@@ -63,12 +63,12 @@
                                 <td>{{$card->Date}}</td>
                                 <td><a href="{{route('user')}}?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
                                 <td>{{$card->TreatmentCategory}} | {{$card->Description}}</td>
-                                <td>{{$card->Price}}</td>
+                                <td>{{$card->Price}}$</td>
                                 <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                 <td>{{$card->Recognition}}</td>
                                 <td>{{$card->Treatment}}</td>
-                                <td><button class="btn btn-dark" data-toggle="modal" data-target="#FormEditd{{$card->CardId}}">Edytuj</button></td>
-                                <td><button class="btn btn-dark" data-toggle="modal" data-target="#FormEditdel{{$card->CardId}}">Usuń</button></td>
+                                <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEditd{{$card->CardId}}">Edytuj</button></td>
+                                <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEditdel{{$card->CardId}}">Usuń</button></td>
                             </tr>
                         @endforeach
                         </table>
@@ -83,7 +83,12 @@
                                 <th>Data Urodzenia</th>
                                 <th>Numer telefonu</th>
                                 <th>Pod nadzorem</th>
-                                <th>Edytuj</th>
+                                @if(Auth::guest())
+                                @else
+                                    @if(Auth::user()->name == 'allahaka' or Auth::user()->name == 'KaMisia' or Auth::user()->name == 'Dr_krawix')
+                                        <th>Edytuj</th>
+                                    @endif
+                                @endif
                             </tr>
                             @foreach ($employees as $employee)
                                 <tr>
@@ -93,19 +98,24 @@
                                     <td>{{$employee->BirthDate}}</td>
                                     <td>{{$employee->PhoneNumber}}</td>
                                     <td> @if($employee->UnderSupervision) <a href="{{route('user')}}?emId={{$employee->UnderSupervision}}">  Profil Osoby Nadzorującej  </a> @endif </td>
-                                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#UserEmployeeForm{{$employee->Id}}">Edytuj</button></td>
+                                    @if(Auth::guest())
+                                    @else
+                                        @if(Auth::user()->name == 'allahaka' or Auth::user()->name == 'KaMisia' or Auth::user()->name == 'Dr_krawix')
+                                            <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#UserEmployeeForm{{$employee->Id}}">Edytuj</button></td>
+                                        @endif
+                                    @endif
                                 </tr>
                             @endforeach
                         </table>
                         <br><br><br>
-                        <table class="table table-dark bg-dark table-bordered">
+                        <table id="table" class="table table-dark bg-dark table-bordered">
                             <tr>
-                                <th scope="col">Imie i Nazwisko</th>
-                                <th scope="col">Odesłanie</th>
-                                <th scope="col">Data</th>
-                                <th scope="col">Kategoria Zabiegu</th>
-                                <th scope="col">Cena</th>
-                                <th scope="col">Zapłacono</th>
+                                <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Imie i Nazwisko</th>
+                                <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Odesłanie</th>
+                                <th scope="col" onclick="sortTable(2)" style="cursor:pointer">Data</th>
+                                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Kategoria Zabiegu</th>
+                                <th scope="col" onclick="sortTable(4)" style="cursor:pointer">Cena</th>
+                                <th scope="col" onclick="sortTable(5)" style="cursor:pointer">Zapłacono</th>
                                 <th scope="col">Rozpoznanie</th>
                                 <th scope="col">Zabieg</th>
                                 <th scope="col">Edytuj</th>
@@ -117,12 +127,12 @@
                                     <td>{{$card->Annotation}}</td>
                                     <td>{{$card->Date}}</td>
                                     <td>{{$card->TreatmentCategory}} | {{$card->Description}}</td>
-                                    <td>{{$card->Price}}</td>
+                                    <td>{{$card->Price}}$</td>
                                     <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                     <td>{{$card->Recognition}}</td>
                                     <td>{{$card->Treatment}}</td>
-                                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#UserEmployeeFormTwo{{$card->CardId}}">Edytuj</button></td>
-                                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#UserEmployeeFormTwoDelete{{$card->CardId}}">Usuń</button></td>
+                                    <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#UserEmployeeFormTwo{{$card->CardId}}">Edytuj</button></td>
+                                    <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#UserEmployeeFormTwoDelete{{$card->CardId}}">Usuń</button></td>
                                 </tr>
                             @endforeach
                         </table>
