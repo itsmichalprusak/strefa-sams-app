@@ -28,6 +28,7 @@
                         <select required class="form-control bg-dark text-white" name="rank" id="stopien">
                             <option @if($employee->Rank == 'Szef SAMS') Selected @endif value="Szef SAMS">Szef SAMS</option>
                             <option @if($employee->Rank == 'Dyrektor') Selected @endif value="Dyrektor">Dyrektor</option>
+                            <option @if($employee->Rank == 'Doktor') Selected @endif value="Doktor">Doktor</option>
                             <option @if($employee->Rank == 'Lekarz ratownictwa medycznego') Selected @endif value="Lekarz ratownictwa medycznego">Lekarz ratownictwa medycznego</option>
                             <option @if($employee->Rank == 'Ratownik Medyczny') Selected @endif value="Ratownik Medyczny">Ratownik Medyczny</option>
                             <option @if($employee->Rank == 'Pielęgniarz') Selected @endif value="Pielęgniarz">Pielęgniarz</option>
