@@ -8,12 +8,12 @@
         <input type="text" id="Input" onkeyup="SearchByName()" class="form-control bg-dark text-white" placeholder="Szukaj po imieniu">
         <table style="width: 100%" id="table" class="table table-dark bg-dark table-bordered">
             <tr>
-                <th scope="col">Imie i Nazwisko</th>
-                <th scope="col">Kwota Ubezpieczenia</th>
-                <th scope="col">Data Nabycia</th>
-                <th scope="col">Lekarz nadający ubezpieczenie</th>
-                <th scope="col">Data wygaśnięcia</th>
-                <th scope="col">Ilość dni pozostała</th>
+                <th scope="col" onclick="sortTable(0)" style="cursor:pointer" >Imie i Nazwisko</th>
+                <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Kwota Ubezpieczenia</th>
+                <th scope="col" onclick="sortTable(2)" style="cursor:pointer">Data Nabycia</th>
+                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Lekarz nadający ubezpieczenie</th>
+                <th scope="col" onclick="sortTable(4)" style="cursor:pointer">Data wygaśnięcia</th>
+                <th scope="col" onclick="sortTable(5)" style="cursor:pointer">Ilość dni pozostała</th>
                 <th scope="col">Edytuj</th>
                 <th scope="col">Usuń</th>
             </tr>
@@ -21,7 +21,7 @@
             @foreach($insurances as $insurance)
                 <tr>
                     <td><a href="{{route('user')}}?id={{$insurance->Id}}">{{$insurance->Name}} {{$insurance->Surname}}</a></td>
-                    <td>@if($insurance->InsuranceAmount == 9999) 0 | Służba @else {{$insurance->InsuranceAmount}} @endif</td>
+                    <td>@if($insurance->InsuranceAmount == 9999) 0$ | Służba @else {{$insurance->InsuranceAmount}}$ @endif</td>
                     <td>{{$insurance->InsuranceDate}}</td>
                     <td><a href="{{route('user')}}?emId={{$insurance->emId}}">{{$insurance->emName}} {{$insurance->emSurname}}</a></td>
                     <td>
@@ -46,8 +46,8 @@
                             Nigdy | Służby porządkowe
                         @endif
                     </td>
-                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#InsuranceEdit{{$insurance->InId}}">Edytuj</button></td>
-                    <td><button class="btn btn-dark" data-toggle="modal" data-target="#DeleteInsurance{{$insurance->InId}}">Usuń</button></td>
+                    <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#InsuranceEdit{{$insurance->InId}}">Edytuj</button></td>
+                    <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#DeleteInsurance{{$insurance->InId}}">Usuń</button></td>
                 </tr>
             @endforeach
         </table>
