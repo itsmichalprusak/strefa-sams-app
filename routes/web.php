@@ -146,5 +146,10 @@ Route::post('/debtors/update',[
     'as' => 'UpdateDebtors',
 ]);
 
+Route::post('/users/patients/delete',[
+    'uses' => 'SitesController@UserDeletePatient',
+    'as' => 'UserDeletePatient',
+]);
+
 
 Auth::routes();
