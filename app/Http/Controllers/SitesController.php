@@ -97,6 +97,7 @@ class SitesController extends Controller
 
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
+                            ->where('Patients.Registered', '=', '1')
                             ->get();
 
         $employees = DB::table('Employees')
@@ -143,6 +144,7 @@ class SitesController extends Controller
 
         $patientstwo = DB::table('Patients')
                             ->select('Patients.*')
+                            ->where('Patients.Registered', '=', '1')
                             ->get();
 
         $treatments = DB::table('Treatments')
@@ -190,6 +192,7 @@ class SitesController extends Controller
 
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname')
+                            ->where('Patients.Registered', '=', '1')
                             ->get();
 
         return view('Base.Insurance', ['employees' => $employees, 'patients' => $patients]);
@@ -210,6 +213,7 @@ class SitesController extends Controller
         DB::update('UPDATE Patients SET InsuranceID = :InsuranceId WHERE Id= :PatientId', [$InsuranceId, $PatientId]);
 
         DB::table('Insurances') -> insert($data);
+
         return redirect(Route('insurance'));
     }
 
@@ -217,6 +221,7 @@ class SitesController extends Controller
 
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
+                            ->where('Patients.Registered', '=', '1')
                             ->get();
 
         $employees = DB::table('Employees')
@@ -255,6 +260,7 @@ class SitesController extends Controller
 
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured', 'Patients.BirthDate', 'Patients.PhoneNumber')
+                            ->where('Patients.Registered', '=', '1')
                             ->orderBy('Patients.Surname', 'asc')
                             ->orderBy('Patients.Name', 'asc')
                             ->paginate(15);
@@ -279,6 +285,7 @@ class SitesController extends Controller
                             ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
                             ->where('CardIndexes.IsPaid', '=', 0)
+                            ->where('Patients.Registered', '=', '1')
                             ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
                             ->orderBy('Patients.Surname', 'asc')
                             ->orderBy('Patients.Name', 'asc')
@@ -478,6 +485,19 @@ class SitesController extends Controller
                             ->update($data);
 
         return redirect(Route('Debtors'));
+    }
+
+    public function UserDeletePatient(Request $req){
+
+        $id = $req->input('id');
+
+        $data = array('Registered' => '0');
+
+        DB::table('Patients')
+                            ->where('Id', '=', $id)
+                            ->update($data);
+
+        return redirect(Route('home'));
     }
 
 }
