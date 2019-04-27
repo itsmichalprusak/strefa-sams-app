@@ -7,6 +7,7 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class SitesController extends Controller
 {
@@ -92,7 +93,7 @@ class SitesController extends Controller
                                 'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'Treatments.Id as TreatmentId', 'CardIndexes.Id as CardId', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
                                 'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
                             ->orderByDesc('CardIndexes.Date')
-                            ->paginate(10);
+                            ->paginate(7);
 
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
@@ -254,6 +255,8 @@ class SitesController extends Controller
 
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured', 'Patients.BirthDate', 'Patients.PhoneNumber')
+                            ->orderBy('Patients.Surname', 'asc')
+                            ->orderBy('Patients.Name', 'asc')
                             ->paginate(15);
 
         return view('profiles.list', ['patients' => $patients]);
@@ -263,6 +266,8 @@ class SitesController extends Controller
 
         $employees = DB::table('Employees')
                             ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber')
+                            ->orderBy('Employees.Surname', 'asc')
+                            ->orderBy('Employees.Name', 'asc')
                             ->paginate(15);
 
         return view('profiles.employees', ['employees' => $employees]);
@@ -272,9 +277,11 @@ class SitesController extends Controller
 
         $debtors = DB::table('CardIndexes')
                             ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
-                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('CardIndexes.Price as Debt'))
+                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
                             ->where('CardIndexes.IsPaid', '=', 0)
-                            ->groupBy('Patients.Id', 'Patients.Surname', 'Patients.Name', 'CardIndexes.Price')
+                            ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
+                            ->orderBy('Patients.Surname', 'asc')
+                            ->orderBy('Patients.Name', 'asc')
                             ->paginate(20);
 
         return view('Base.debtors', ['debtors' => $debtors]);
@@ -457,6 +464,20 @@ class SitesController extends Controller
                             ->insert($data);
 
         return redirect(Route('home'));
+    }
+
+    public function UpdateDebtors(Request $req){
+
+        $patient = $req->input('Id');
+
+        $data = array('IsPaid' => '1');
+
+        DB::table('CardIndexes')
+                            ->where('PatientId', '=', $patient)
+                            ->where('IsPaid', '=', '0')
+                            ->update($data);
+
+        return redirect(Route('Debtors'));
     }
 
 }
