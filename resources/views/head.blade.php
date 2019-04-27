@@ -78,6 +78,7 @@
                                             <a data-toggle="modal" data-target="#AddAccount" class="dropdown-item text-white">Dodaj konto</a>
                                         @endif()
                                         @endif()
+                                        <a data-toggle="modal" data-target="#ChangePassword" class="dropdown-item text-white">Zmień hasło</a>
                                         <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -129,7 +130,7 @@
                                                     <input id="password" type="password" class="bg-dark text-white form-control" name="password" required>
                                                 </div>
                                             </div>
-
+                                                @include('popup.head')
                                             <div class="form-group row mb-0">
                                                 <div class="col-md-8 offset-md-4">
                                                     <button type="submit" class="btn btn-secondary">
@@ -143,8 +144,51 @@
                             </div>
                         </div>
                     @endif()
-                @endif()
 
+                        <div class="modal fade" id="ChangePassword" tabindex="-1" role="dialog" aria-labelledby="DelCenter" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content bg-dark">
+                                    <div class="modal-header bg-dark">
+                                        <h3 class="modal-title" id="DelTitle">Zmień hasło</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form method="POST" action="{{ route('ChangePassword') }}">
+                                            @csrf
+
+                                            <input type="hidden" name="email" value="{{Auth::user()->name}}">
+                                            <div class="form-group row">
+                                                <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Nowe hasło') }}</label>
+                                                <div class="col-md-6">
+                                                    <input id="password" type="password" class="bg-dark text-white form-control" name="pass" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Powtórz hasło') }}</label>
+                                                <div class="col-md-6">
+                                                    <input id="password" type="password" class="bg-dark text-white form-control" name="rpass" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row mb-0">
+                                                <div class="col-md-8 offset-md-4">
+                                                    <button type="submit" class="btn btn-secondary">
+                                                        Zmień hasło
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                @endif()
             </div>
         </div>
     </body>
