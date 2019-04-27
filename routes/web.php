@@ -151,5 +151,10 @@ Route::post('/users/patients/delete',[
     'as' => 'UserDeletePatient',
 ]);
 
+Route::post('/account/password/change',[
+    'uses' => 'SitesController@ChangePassword',
+    'as' => 'ChangePassword',
+]);
+
 
 Auth::routes();
