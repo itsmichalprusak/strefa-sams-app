@@ -44,6 +44,7 @@
         <div class="form-group">
             <label for="przydzial">Osoba nadzorująca</label>
             <select class="form-control bg-dark text-white" name="UnderSupervision" id="Employee">
+                <option value="">Brak</option>
                 @foreach($employees as $employee)
                     <option value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
                 @endforeach
