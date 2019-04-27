@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Employees;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Auth;
 
 class SitesController extends Controller
 {
@@ -291,7 +292,13 @@ class SitesController extends Controller
                             ->orderBy('Patients.Name', 'asc')
                             ->paginate(20);
 
-        return view('Base.debtors', ['debtors' => $debtors]);
+        $permissions = DB::table('users')
+                            ->join('Employees', 'Employees.Id', '=', 'users.EmployeeId')
+                            ->select('Employees.Rank as Rank')
+                            ->where('users.id', '=', Auth::id())
+                            ->get();
+
+        return view('Base.debtors', ['debtors' => $debtors, 'permissions' => $permissions]);
     }
 
     public function CardIndexUpdate(Request $req){
@@ -464,8 +471,9 @@ class SitesController extends Controller
 
         $nick = $req->input('login');
         $password = bcrypt($req->input('password'));
+        $employeeId = $req->input('employee');
 
-        $data = array('name' => $nick, 'email' => $nick, 'password' => $password);
+        $data = array('name' => $nick, 'email' => $nick, 'password' => $password, 'EmployeeId' => $employeeId);
 
         DB::table('users')
                             ->insert($data);
@@ -496,6 +504,23 @@ class SitesController extends Controller
         DB::table('Patients')
                             ->where('Id', '=', $id)
                             ->update($data);
+
+        return redirect(Route('home'));
+    }
+
+    public function ChangePassword(Request $req){
+
+        $email = $req->input('email');
+        $pass = $req->input('pass');
+        $rpass = $req->input('pass');
+
+        $values = array('password' => bcrypt($rpass));
+
+        if($pass == $rpass){
+            DB::table('users')
+                            ->where('email', '=', $email)
+                            ->update($values);
+        }
 
         return redirect(Route('home'));
     }
