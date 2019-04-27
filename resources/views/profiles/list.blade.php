@@ -8,10 +8,10 @@
         <input type="text" id="Input" onkeyup="SearchByName()" class="form-control bg-dark text-white" placeholder="Szukaj po imieniu">
         <table id="table" class="table table-dark bg-dark table-bordered" width="100%">
             <tr>
-                <th>Imię i Nazwisko</th>
-                <th>Ubezpieczony</th>
-                <th>Data urodzenia</th>
-                <th>Numer telefonu</th>
+                <th onclick="sortTable(0)" style="cursor:pointer">Imię i Nazwisko</th>
+                <th onclick="sortTable(1)" style="cursor:pointer">Ubezpieczony</th>
+                <th onclick="sortTable(2)" style="cursor:pointer">Data urodzenia</th>
+                <th onclick="sortTable(3)" style="cursor:pointer">Numer telefonu</th>
             </tr>
             @foreach($patients as $patient)
                 <tr>
