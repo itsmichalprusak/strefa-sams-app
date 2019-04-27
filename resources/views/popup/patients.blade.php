@@ -65,6 +65,30 @@
     </div>
 </div>
 </div>
+
+<div class="modal fade" id="DeletePatient{{$user->Id}}" tabindex="-1" role="dialog" aria-labelledby="DelCenter" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header bg-dark">
+                <h3 class="modal-title" id="DelTitle">Usuń pacjęta</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Ar ju siure?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                <form method="POST" action="{{Route('UserDeletePatient')}}">
+                    {{csrf_field()}}
+                    <input type="hidden" name="id" value="{{$user->Id}}">
+                    <input type="submit" class="btn btn-danger" value="Usuń">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endforeach
 
 @foreach($cardindexes as $card)
