@@ -38,12 +38,12 @@
                                         <td>{{$card->Date}}</td>
                                         <td><a href="{{route('user')}}?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
                                         <td>{{$card->TreatmentCategory}}</td>
-                                        <td>{{$card->Price}}</td>
+                                        <td>{{$card->Price}}$</td>
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
                                         <td>{{$card->Recognition}}</td>
                                         <td>{{$card->Treatment}}</td>
-                                        <td><button class="btn btn-dark" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</button></td>
-                                        <td><button class="btn btn-dark" data-toggle="modal" data-target="#Formd{{$card->CardId}}">Usuń</button></td>
+                                        <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</button></td>
+                                        <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#Formd{{$card->CardId}}">Usuń</button></td>
                                     </tr>
                                 @endforeach
 
