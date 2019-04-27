@@ -141,5 +141,10 @@ Route::post('/addaccount',[
     'as' => 'AddAccount'
 ]);
 
+Route::post('/debtors/update',[
+    'uses' => 'SitesController@UpdateDebtors',
+    'as' => 'UpdateDebtors',
+]);
+
 
 Auth::routes();
