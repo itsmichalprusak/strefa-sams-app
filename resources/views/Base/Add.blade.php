@@ -24,6 +24,7 @@
             <select required class="form-control bg-dark text-white" name="rank" id="stopien">
                 <option value="Szef SAMS">Szef SAMS</option>
                 <option value="Dyrektor">Dyrektor</option>
+                <option value="Doktor">Doktor</option>
                 <option value="Lekarz ratownictwa medycznego">Lekarz ratownictwa medycznego</option>
                 <option value="Ratownik Medyczny">Ratownik Medyczny</option>
                 <option value="Pielęgniarz">Pielęgniarz</option>
