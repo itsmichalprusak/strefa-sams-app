@@ -27,6 +27,7 @@
                         <th>Grupa Krwi</th>
                         <th>Nick Discord</th>
                         <th>Edytuj</th>
+                        <th>Usuń</th>
                     </tr>
                     @foreach ($patients as $user)
                         <tr>
@@ -38,6 +39,7 @@
                             <td>{{$user->BloodGroup}}</td>
                             <td>{{$user->Email}}</td>
                             <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEdit{{$user->Id}}">Edytuj</button></td>
+                            <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#DeletePatient{{$user->Id}}">Usuń</button></td>
                         </tr>
                     @endforeach
                     </table>
