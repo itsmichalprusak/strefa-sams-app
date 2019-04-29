@@ -68,6 +68,58 @@ class SitesController extends Controller
         $insurances = DB::table('Insurances')
                             ->join('Patients', 'Patients.Id', '=', 'Insurances.PatientId')
                             ->join('Employees', 'Employees.Id', '=', 'Insurances.PersonIssuing')
+                            ->select('Patients.Id', 'Insurances.InsuranceAmount', 'Insurances.Id as InId', 'Insurances.InsuranceDate')
+                            ->orderByDesc('Insurances.InsuranceDate')
+                            ->paginate(10);
+
+
+        $now = time();
+
+        foreach($insurances as $insurance){
+            if($insurance->InsuranceAmount == 800)
+                $date1 = date('Y-m-d', strtotime("+7 day",strtotime($insurance->InsuranceDate)));
+            elseif($insurance->InsuranceAmount == 1300)
+                $date2 = date('Y-m-d', strtotime("+14 day",strtotime($insurance->InsuranceDate)));
+            elseif($insurance->InsuranceAmount == 2200)
+                $date3 = date('Y-m-d', strtotime("+30 day",strtotime($insurance->InsuranceDate)));
+
+            if(isset($date1)){
+                if (round((((strtotime($date1) - $now) / 24) / 60) / 60) < 0) {
+                    DB::table('insurances')
+                            ->where('Id', '=', $insurance->InId)
+                            ->delete();
+                    DB::table('Patients')
+                            ->where('Id', '=', $insurance->Id)
+                            ->update(array('IsInsured' => '0', 'InsuranceId' => NULL));
+                }
+            }
+
+            if(isset($date2)){
+                if (round((((strtotime($date2) - $now) / 24) / 60) / 60) < 0) {
+                    DB::table('insurances')
+                            ->where('Id', '=', $insurance->InId)
+                            ->delete();
+                    DB::table('Patients')
+                            ->where('Id', '=', $insurance->Id)
+                            ->update(array('IsInsured' => '0', 'InsuranceId' => NULL));
+                }
+            }
+
+            if(isset($date3)){
+                if (round((((strtotime($date3) - $now) / 24) / 60) / 60) < 0) {
+                    DB::table('insurances')
+                            ->where('Id', '=', $insurance->InId)
+                            ->delete();
+                    DB::table('Patients')
+                            ->where('Id', '=', $insurance->Id)
+                            ->update(array('IsInsured' => '0', 'InsuranceId' => NULL));
+                }
+            }
+        }
+
+        $insurancesTwo = DB::table('Insurances')
+                            ->join('Patients', 'Patients.Id', '=', 'Insurances.PatientId')
+                            ->join('Employees', 'Employees.Id', '=', 'Insurances.PersonIssuing')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Insurances.InsuranceAmount', 'Insurances.Id as InId',
                                 'Insurances.InsuranceDate', 'Employees.Id as emId', 'Employees.Name as emName', 'Employees.Surname as emSurname')
                             ->orderByDesc('Insurances.InsuranceDate')
@@ -81,7 +133,7 @@ class SitesController extends Controller
                             ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
                             ->get();
 
-        return view('Insurances.list', ['insurances' => $insurances, 'patients' => $patients, 'employees' => $employees]);
+        return view('Insurances.list', ['insurances' => $insurancesTwo, 'patients' => $patients, 'employees' => $employees]);
     }
 
     public function home(){
@@ -459,10 +511,16 @@ class SitesController extends Controller
     public function DeleteInsurance(Request $req){
 
         $id = $req->input('InsuranceId');
+        $uid = $req->input('PatientId');
+
+        $data = array('IsInsured' => '0', 'InsuranceId' => NULL);
 
         DB::table('Insurances')
                             ->where('Insurances.Id', '=', $id)
                             ->delete();
+        DB::table('Patients')
+                            ->where('Patients.Id', '=', $uid)
+                            ->update($data);
 
         return redirect(Route('insurance'));
     }
