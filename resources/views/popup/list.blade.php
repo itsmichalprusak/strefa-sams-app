@@ -74,6 +74,7 @@
                 <form method="POST" action="{{Route('DeleteInsurance')}}">
                     {{csrf_field()}}
                     <input type="hidden" name="InsuranceId" value="{{$insurance->InId}}">
+                    <input type="hidden" name="PatientId" value="{{$insurance->Id}}">
                     <input type="submit" class="btn btn-danger" value="Usuń">
                 </form>
             </div>
