@@ -37,11 +37,23 @@
                     </td>
                     <td>
                         @if($insurance->InsuranceAmount == 800)
-                            {{ round((((strtotime($date1) - $now)/24)/60)/60) }}
+                            @if(round((((strtotime($date1) - $now)/24)/60)/60) >= 0)
+                                {{round((((strtotime($date1) - $now)/24)/60)/60)}}
+                            @elseif(round((((strtotime($date1) - $now)/24)/60)/60) < 0)
+                                0 od {{abs(round((((strtotime($date1) - $now)/24)/60)/60))}} dni
+                            @endif
                         @elseif($insurance->InsuranceAmount == 1300)
-                            {{ round((((strtotime($date2) - $now)/24)/60)/60) }}
+                            @if(round((((strtotime($date2) - $now)/24)/60)/60) >= 0)
+                                {{round((((strtotime($date2) - $now)/24)/60)/60)}}
+                            @elseif(round((((strtotime($date2) - $now)/24)/60)/60) < 0)
+                                0 od {{abs(round((((strtotime($date2) - $now)/24)/60)/60))}} dni
+                            @endif
                         @elseif($insurance->InsuranceAmount == 2200)
-                            {{ round((((strtotime($date3) - $now)/24)/60)/60) }}
+                            @if(round((((strtotime($date3) - $now)/24)/60)/60) >= 0)
+                                {{round((((strtotime($date3) - $now)/24)/60)/60)}}
+                            @elseif(round((((strtotime($date3) - $now)/24)/60)/60) < 0)
+                                0 od {{abs(round((((strtotime($date3) - $now)/24)/60)/60))}} dni
+                            @endif
                         @elseif($insurance->InsuranceAmount == 9999)
                             Nigdy | Służby porządkowe
                         @endif
@@ -49,6 +61,7 @@
                     <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#InsuranceEdit{{$insurance->InId}}">Edytuj</button></td>
                     <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#DeleteInsurance{{$insurance->InId}}">Usuń</button></td>
                 </tr>
+
             @endforeach
         </table>
 
