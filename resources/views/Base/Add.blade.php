@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             <label for="dataurodzenia">Data urodzin</label>
-            <input type="date" name="date" class="form-control bg-dark text-white" id="dataurodzenia" onfocus="(this.type='date')">
+            <input type="date" onkeydown="return false" name="date" class="form-control bg-dark text-white" id="dataurodzenia" onfocus="(this.type='date')">
             <small id="surname" class="form-text text-muted">Podaj datę urodzenia pracownika, którego chcesz dodać do bazy.</small>
         </div>
         <div class="form-group">
