@@ -47,7 +47,7 @@
         </div>
         <div class="form-group">
             <label for="Price">Cena</label>
-                <input required type="text" name="price" class="form-control bg-dark text-white" id="Price">
+                <input required pattern="\d+" type="text" name="price" class="form-control bg-dark text-white" id="Price">
             <small id="imie" class="form-text text-muted">Podaj koszt zabieg.</small>
         </div>
         <div class="form-group">
