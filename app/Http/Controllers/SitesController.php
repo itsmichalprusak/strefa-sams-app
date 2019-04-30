@@ -246,6 +246,9 @@ class SitesController extends Controller
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname')
                             ->where('Patients.Registered', '=', '1')
+                            ->whereNotIn('Id', function ($query){
+                                $query->select('PatientId')->from('Insurances');
+                            })
                             ->get();
 
         return view('Base.Insurance', ['employees' => $employees, 'patients' => $patients]);
