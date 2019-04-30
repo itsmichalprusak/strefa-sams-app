@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="date">Data Dodania</label>
-            <input required type="date" name="Date"  class="form-control bg-dark text-white" id="date" onfocus="(this.type='date')" value="{{date("Y-m-d")}}">
+            <input required type="date" onkeydown="return false" name="Date"  class="form-control bg-dark text-white" id="date" onfocus="(this.type='date')" value="{{date("Y-m-d")}}">
             <small id="date" class="form-text text-muted">Podaj Datę utworzenia wpisu ubezpieczenia.</small>
         </div>
         <div class="form-group">
