@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label for="PhoneNumber">Numer telefonu</label>
-            <input required type="text" id="PhoneNumber" name="PhoneNumber" placeholder="Numer Telefonu" aria-describedby="PhoneNumber" class="form-control bg-dark text-white">
+            <input required pattern="\d+" type="text" id="PhoneNumber" name="PhoneNumber" placeholder="Numer Telefonu" aria-describedby="PhoneNumber" class="form-control bg-dark text-white">
             <small id="PhoneNumber" class="form-text text-muted">Podaj Numer Telefonu pacjenta, którego chcesz dodać do bazy.</small>
         </div>
         <div class="form-group">

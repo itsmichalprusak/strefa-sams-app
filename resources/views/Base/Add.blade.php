@@ -38,7 +38,7 @@
         </div>
         <div class="form-group">
             <label for="telefon">Numer telefonu</label>
-            <input required type="phone" name="phonenumber" class="form-control bg-dark text-white" id="telefon" placeholder="Numer Telefonu">
+            <input required pattern="\d+" type="phone" name="phonenumber" class="form-control bg-dark text-white" id="telefon" placeholder="Numer Telefonu">
             <small id="surname" class="form-text text-muted">Podaj numer telefonu pracownika, którego chcesz dodać do bazy.</small>
         </div>
         <div class="form-group">
