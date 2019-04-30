@@ -2,6 +2,9 @@
 
     $employees = DB::table('Employees')
                             ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+                            ->whereNotIn('Id', function($query){
+                                $query->select('EmployeeId')->from('users');
+                            })
                             ->get();
 
 ?>
