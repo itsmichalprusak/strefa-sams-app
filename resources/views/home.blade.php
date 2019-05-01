@@ -17,10 +17,9 @@
                         @endif
 
                         <div class="table-responsive bg-dark table-dark">
-                            <table style="width: 100%" class="table">
+                            <table style="width: 100%" class="table w-auto">
                                 <tr>
                                     <th scope="col">Imie i Nazwisko</th>
-                                    <th scope="col">Odesłanie</th>
                                     <th scope="col">Data</th>
                                     <th scope="col">Lekarz nadzorujacy</th>
                                     <th scope="col">Kategoria zabiegu</th>
@@ -34,7 +33,6 @@
                                 @foreach($cardindexes as $card)
                                     <tr>
                                         <td><a href="{{route('user')}}?id={{$card->Id}}">{{$card->Name}} {{$card->Surname}}</a></td>
-                                        <td>{{$card->Annotation}}</td>
                                         <td>{{$card->Date}}</td>
                                         <td><a href="{{route('user')}}?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
                                         <td>{{$card->TreatmentCategory}}</td>

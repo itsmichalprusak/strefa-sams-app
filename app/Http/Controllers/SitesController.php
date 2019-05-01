@@ -75,6 +75,8 @@ class SitesController extends Controller
 
         $now = time();
 
+        $search = request('search');
+
         foreach($insurances as $insurance){
             if($insurance->InsuranceAmount == 800)
                 $date1 = date('Y-m-d', strtotime("+7 day",strtotime($insurance->InsuranceDate)));
@@ -85,7 +87,7 @@ class SitesController extends Controller
 
             if(isset($date1)){
                 if (round((((strtotime($date1) - $now) / 24) / 60) / 60) < 0) {
-                    DB::table('insurances')
+                    DB::table('Insurances')
                             ->where('Id', '=', $insurance->InId)
                             ->delete();
                     DB::table('Patients')
@@ -96,7 +98,7 @@ class SitesController extends Controller
 
             if(isset($date2)){
                 if (round((((strtotime($date2) - $now) / 24) / 60) / 60) < 0) {
-                    DB::table('insurances')
+                    DB::table('Insurances')
                             ->where('Id', '=', $insurance->InId)
                             ->delete();
                     DB::table('Patients')
@@ -107,7 +109,7 @@ class SitesController extends Controller
 
             if(isset($date3)){
                 if (round((((strtotime($date3) - $now) / 24) / 60) / 60) < 0) {
-                    DB::table('insurances')
+                    DB::table('Insurances')
                             ->where('Id', '=', $insurance->InId)
                             ->delete();
                     DB::table('Patients')
@@ -122,6 +124,7 @@ class SitesController extends Controller
                             ->join('Employees', 'Employees.Id', '=', 'Insurances.PersonIssuing')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Insurances.InsuranceAmount', 'Insurances.Id as InId',
                                 'Insurances.InsuranceDate', 'Employees.Id as emId', 'Employees.Name as emName', 'Employees.Surname as emSurname')
+                            ->where('Patients.Surname', 'LIKE', '%' . $search . '%')
                             ->orderByDesc('Insurances.InsuranceDate')
                             ->paginate(10);
 
@@ -133,7 +136,7 @@ class SitesController extends Controller
                             ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
                             ->get();
 
-        return view('Insurances.list', ['insurances' => $insurancesTwo, 'patients' => $patients, 'employees' => $employees]);
+        return view('Insurances.list', ['insurances' => $insurancesTwo, 'patients' => $patients, 'employees' => $employees, 'search' => $search]);
     }
 
     public function home(){
@@ -314,34 +317,43 @@ class SitesController extends Controller
 
     public function PatientsList(){
 
+        $search = request('search');
+
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured', 'Patients.BirthDate', 'Patients.PhoneNumber')
                             ->where('Patients.Registered', '=', '1')
+                            ->where('Surname', 'LIKE', '%' . $search . '%')
                             ->orderBy('Patients.Surname', 'asc')
                             ->orderBy('Patients.Name', 'asc')
                             ->paginate(15);
 
-        return view('profiles.list', ['patients' => $patients]);
+        return view('profiles.list', ['patients' => $patients, 'search' => $search]);
     }
 
     public function EmployeesList(){
 
+        $search =  request('search');
+
         $employees = DB::table('Employees')
                             ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber')
+                            ->where('Surname', 'LIKE', '%' . $search . '%')
                             ->orderBy('Employees.Surname', 'asc')
                             ->orderBy('Employees.Name', 'asc')
                             ->paginate(15);
 
-        return view('profiles.employees', ['employees' => $employees]);
+        return view('profiles.employees', ['employees' => $employees, 'search' => $search]);
     }
 
     public function Debtors(){
+
+        $search =  request('search');
 
         $debtors = DB::table('CardIndexes')
                             ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
                             ->where('CardIndexes.IsPaid', '=', 0)
                             ->where('Patients.Registered', '=', '1')
+                            ->where('Surname', 'LIKE', '%' . $search . '%')
                             ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
                             ->orderBy('Patients.Surname', 'asc')
                             ->orderBy('Patients.Name', 'asc')
@@ -353,7 +365,7 @@ class SitesController extends Controller
                             ->where('users.id', '=', Auth::id())
                             ->get();
 
-        return view('Base.debtors', ['debtors' => $debtors, 'permissions' => $permissions]);
+        return view('Base.debtors', ['debtors' => $debtors, 'permissions' => $permissions, 'search' => $search]);
     }
 
     public function CardIndexUpdate(Request $req){

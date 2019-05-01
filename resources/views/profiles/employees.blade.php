@@ -5,7 +5,13 @@
 @section('content')
 
     <div class="table-responsive">
-        <input type="text" id="Input" onkeyup="SearchByName()" class="form-control bg-dark text-white" placeholder="Szukaj po imieniu">
+        <form action="{{Route('EmployeesList')}}" method="get" class="form-inline">
+            {{csrf_field()}}
+            <div class="form-group mx-sm-2 mb-2">
+                <input type="text" id="Input" name="search" class="form-control bg-dark text-white" placeholder="Szukaj po nazwisku" autofocus value="{{$search}}">
+            </div>
+            <input type="submit" class="btn btn-primary mb-2">
+        </form>
         <table id="table" class="table table-dark bg-dark table-bordered" width="100%">
             <tr>
                 <th onclick="sortTable(0)" style="cursor:pointer">Imię i Nazwisko</th>

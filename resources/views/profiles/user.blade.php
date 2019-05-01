@@ -44,10 +44,9 @@
                     @endforeach
                     </table>
                         <br><br><h2>Ostatnie wpisy o pacjencie</h2><br><br>
-                    <table id="table" class="table table-dark bg-dark table-bordered">
+                    <table id="table" class="table table-dark bg-dark table-bordered w-auto">
                         <tr>
                             <th>Imie i Nazwisko</th>
-                            <th onclick="sortTable(1)" style="cursor:pointer">Odesłanie</th>
                             <th onclick="sortTable(2)" style="cursor:pointer">Data</th>
                             <th onclick="sortTable(3)" style="cursor:pointer">Lekarz Nadzorujący</th>
                             <th onclick="sortTable(4)" style="cursor:pointer">Kategoria zabiegu</th>
@@ -61,7 +60,6 @@
                         @foreach ($cardindexes as $card)
                             <tr>
                                 <td>{{$card->Name}} {{$card->Surname}}</td>
-                                <td>{{$card->Annotation}}</td>
                                 <td>{{$card->Date}}</td>
                                 <td><a href="{{route('user')}}?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
                                 <td>{{$card->TreatmentCategory}} | {{$card->Description}}</td>
@@ -110,7 +108,7 @@
                             @endforeach
                         </table>
                         <br><br><br>
-                        <table id="table" class="table table-dark bg-dark table-bordered">
+                        <table id="table" class="table table-dark bg-dark table-bordered w-auto">
                             <tr>
                                 <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Imie i Nazwisko</th>
                                 <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Odesłanie</th>

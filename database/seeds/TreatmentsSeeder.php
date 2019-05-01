@@ -76,8 +76,8 @@ class TreatmentsSeeder extends Seeder
             'TreatmentCategory' => "III",
             'UnInsurancePriceMin'=> "600",
             'UnInsurancePriceMax'=> "1200",
-            'InsurancePriceMin'=> "60",
-            'InsurancePriceMax'=> "120",
+            'InsurancePriceMin'=> "0",
+            'InsurancePriceMax'=> "0",
             'Description'=> "Operacje bezpośrednio ratujące życie",
         ]);
 

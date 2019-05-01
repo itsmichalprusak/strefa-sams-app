@@ -25,11 +25,6 @@
                             <small id="imie" class="form-text text-muted">Podaj Imię i Nazwisko pacjenta, któremu wykonujesz zabieg.</small>
                         </div>
                         <div class="form-group">
-                            <label for="Annotation">Przysłanie</label>
-                            <input type="text" name="Annotation" class="form-control bg-dark text-white" id="Annotation" placeholder="np. LSPD" value="{{$card->Annotation}}">
-                            <small id="imie" class="form-text text-muted">Podaj przysłanie pacjenta, jeżeli takie miało miejsce.</small>
-                        </div>
-                        <div class="form-group">
                             <label for="date">Data Zabiegu</label>
                             <input required type="date" name="Date" class="form-control bg-dark text-white" onfocus="(this.type='date')" value="{{$card->Date}}">
                             <small id="imie" class="form-text text-muted">Podaj datę wykonania zabiegu.</small>
