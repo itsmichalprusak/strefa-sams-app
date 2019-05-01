@@ -15,8 +15,8 @@
         </form>
         <table id="table" class="table table-dark bg-dark table-bordered" width="100%">
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer">Imię i Nazwisko</th>
-                <th onclick="sortTable(1)" style="cursor:pointer">Kwota zadłużenia</th>
+                <th>Imię i Nazwisko</th>
+                <th>Kwota zadłużenia</th>
                 @if($perm->Rank != 'Pielęgniarz')
                 <th>Zapłacono</th>
                 @endif

@@ -14,10 +14,10 @@
         </form>
         <table id="table" class="table table-dark bg-dark table-bordered" width="100%">
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer">Imię i Nazwisko</th>
-                <th onclick="sortTable(1)" style="cursor:pointer">Ranga</th>
-                <th onclick="sortTable(2)" style="cursor:pointer">Data urodzenia</th>
-                <th onclick="sortTable(3)" style="cursor:pointer">Numer telefonu</th>
+                <th>Imię i Nazwisko</th>
+                <th>Ranga</th>
+                <th>Data urodzenia</th>
+                <th>Numer telefonu</th>
             </tr>
             @foreach($employees as $employee)
                 <tr>

@@ -14,12 +14,12 @@
         </form>
         <table style="width: 100%" id="table" class="table table-dark bg-dark table-bordered">
             <tr>
-                <th scope="col" onclick="sortTable(0)" style="cursor:pointer" >Imie i Nazwisko</th>
-                <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Kwota Ubezpieczenia</th>
-                <th scope="col" onclick="sortTable(2)" style="cursor:pointer">Data Nabycia</th>
-                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Lekarz nadający ubezpieczenie</th>
-                <th scope="col" onclick="sortTable(4)" style="cursor:pointer">Data wygaśnięcia</th>
-                <th scope="col" onclick="sortTable(5)" style="cursor:pointer">Ilość dni pozostała</th>
+                <th scope="col">Imie i Nazwisko</th>
+                <th scope="col">Kwota Ubezpieczenia</th>
+                <th scope="col">Data Nabycia</th>
+                <th scope="col">Lekarz nadający ubezpieczenie</th>
+                <th scope="col">Data wygaśnięcia</th>
+                <th scope="col">Ilość dni pozostała</th>
                 <th scope="col">Edytuj</th>
                 <th scope="col">Usuń</th>
             </tr>

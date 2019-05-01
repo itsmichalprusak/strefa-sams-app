@@ -47,11 +47,11 @@
                     <table id="table" class="table table-dark bg-dark table-bordered w-auto">
                         <tr>
                             <th>Imie i Nazwisko</th>
-                            <th onclick="sortTable(2)" style="cursor:pointer">Data</th>
-                            <th onclick="sortTable(3)" style="cursor:pointer">Lekarz Nadzorujący</th>
-                            <th onclick="sortTable(4)" style="cursor:pointer">Kategoria zabiegu</th>
-                            <th onclick="sortTable(5)" style="cursor:pointer">Cena</th>
-                            <th onclick="sortTable(6)" style="cursor:pointer">Zapłacono</th>
+                            <th>Data</th>
+                            <th>Lekarz Nadzorujący</th>
+                            <th>Kategoria zabiegu</th>
+                            <th>Cena</th>
+                            <th>Zapłacono</th>
                             <th>Rozpoznanie</th>
                             <th>Zabieg</th>
                             <th>Edytuj</th>
@@ -110,12 +110,12 @@
                         <br><br><br>
                         <table id="table" class="table table-dark bg-dark table-bordered w-auto">
                             <tr>
-                                <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Imie i Nazwisko</th>
-                                <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Odesłanie</th>
-                                <th scope="col" onclick="sortTable(2)" style="cursor:pointer">Data</th>
-                                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Kategoria Zabiegu</th>
-                                <th scope="col" onclick="sortTable(4)" style="cursor:pointer">Cena</th>
-                                <th scope="col" onclick="sortTable(5)" style="cursor:pointer">Zapłacono</th>
+                                <th scope="col">Imie i Nazwisko</th>
+                                <th scope="col">Odesłanie</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Kategoria Zabiegu</th>
+                                <th scope="col">Cena</th>
+                                <th scope="col">Zapłacono</th>
                                 <th scope="col">Rozpoznanie</th>
                                 <th scope="col">Zabieg</th>
                                 <th scope="col">Edytuj</th>
