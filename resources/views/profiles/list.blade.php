@@ -14,9 +14,9 @@
         </form>
         <table id="table" class="table table-dark bg-dark table-bordered" width="100%">
             <tr>
-                <th>Imię i Nazwisko</th>
-                <th>Ubezpieczony</th>
-                <th>Data urodzenia</th>
+                <th>@sortablelink('Surname', 'Imię i Nazwisko', '', ['class' => 'text-white'])</th>
+                <th>@sortablelink('Surname', 'Ubezpieczony', '', ['class' => 'text-white'])</th>
+                <th>@sortablelink('Surname', 'Data urodzenia', '', ['class' => 'text-white'])</th>
                 <th>Numer telefonu</th>
             </tr>
             @foreach($patients as $patient)
