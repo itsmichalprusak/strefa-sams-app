@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Employees;
-use App\Patient;
-use App\CardIndexes;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Kyslik\ColumnSortable\Sortable;
 
 class SitesController extends Controller
 {
-
-    use Sortable;
 
     public function __construct(){
         $this->middleware('auth', ['except' => 'index']);
@@ -321,63 +315,127 @@ class SitesController extends Controller
         return redirect(Route('home'));
     }
 
-    public function PatientsList(Patient $patient){
+    public function PatientsList(){
+
+        $sort = Input::get('sort');
+        $type = Input::get('type');
 
         $search = request('search');
 
-        /*$patients = DB::table('Patients')
-                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured', 'Patients.BirthDate', 'Patients.PhoneNumber')
-                            ->where('Patients.Registered', '=', '1')
-                            ->where('Surname', 'LIKE', '%' . $search . '%')
-                            ->orderBy('Patients.Surname', 'asc')
-                            ->orderBy('Patients.Name', 'asc')
-                            ->paginate(15);*/
-
-        $patients = $patient->where('Patients.Registered', '=', '1')->where('Surname', 'LIKE', '%' . $search . '%')->sortable()->paginate(15);
+        if(isset($sort)){
+            $patients = DB::table('Patients')
+                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured', 'Patients.BirthDate', 'Patients.PhoneNumber')
+                                ->where('Patients.Registered', '=', '1')
+                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                ->orderBy($sort, $type)
+                                ->paginate(15);
+        }else{
+            $patients = DB::table('Patients')
+                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured', 'Patients.BirthDate', 'Patients.PhoneNumber')
+                                ->where('Patients.Registered', '=', '1')
+                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                ->orderBy('Patients.Surname', 'asc')
+                                ->paginate(15);
+        }
 
         return view('profiles.list', ['patients' => $patients, 'search' => $search]);
     }
 
-    public function EmployeesList(Employees $employee){
+    public function EmployeesList(){
+
+        $sort = Input::get('sort');
+        $type = Input::get('type');
 
         $search =  request('search');
 
-        /*$employees = DB::table('Employees')
-                            ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber')
-                            ->where('Surname', 'LIKE', '%' . $search . '%')
-                            ->orderBy('Employees.Surname', 'asc')
-                            ->orderBy('Employees.Name', 'asc')
-                            ->sortable()
-                            ->paginate(15);*/
-
-        $employees = $employee->where('Surname', 'LIKE', '%' . $search . '%')->sortable()->paginate(15);
+        if(isset($sort)){
+            $employees = DB::table('Employees')
+                                ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber')
+                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                ->orderBy($sort, $type)
+                                ->paginate(15);
+        }else{
+            $employees = DB::table('Employees')
+                                ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber')
+                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                ->orderBy('Employees.Surname', 'asc')
+                                ->paginate(15);
+        }
 
         return view('profiles.employees', ['employees' => $employees, 'search' => $search]);
     }
 
     public function Debtors(){
 
+        $sort = Input::get('sort');
+        $type = Input::get('type');
+
         $search =  request('search');
 
-        $debtors = DB::table('CardIndexes')
-                            ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
-                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
-                            ->where('CardIndexes.IsPaid', '=', 0)
-                            ->where('Patients.Registered', '=', '1')
-                            ->where('Surname', 'LIKE', '%' . $search . '%')
-                            ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
-                            ->orderBy('Patients.Surname', 'asc')
-                            ->orderBy('Patients.Name', 'asc')
-                            ->paginate(20);
-
-        /*$debtors = $sortable->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
-                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
-                            ->where('CardIndexes.IsPaid', '=', 0)
-                            ->where('Patients.Registered', '=', '1')
-                            ->where('Surname', 'LIKE', '%' . $search . '%')
-                            ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
-                            ->sortable()
-                            ->paginate(20);*/
+        if(isset($sort)){
+            switch($sort){
+                case "Surname":
+                    switch($type){
+                        case "asc":
+                            $debtors = DB::table('CardIndexes')
+                                                ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
+                                                ->where('CardIndexes.IsPaid', '=', 0)
+                                                ->where('Patients.Registered', '=', '1')
+                                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                                ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
+                                                ->orderBy('Patients.Surname', 'asc')
+                                                ->paginate(20);
+                            break;
+                        case "desc":
+                            $debtors = DB::table('CardIndexes')
+                                                ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
+                                                ->where('CardIndexes.IsPaid', '=', 0)
+                                                ->where('Patients.Registered', '=', '1')
+                                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                                ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
+                                                ->orderBy('Patients.Surname', 'desc')
+                                                ->paginate(20);
+                            break;
+                    }
+                case "Debt":
+                    switch($type){
+                        case "asc":
+                            $debtors = DB::table('CardIndexes')
+                                                ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
+                                                ->where('CardIndexes.IsPaid', '=', 0)
+                                                ->where('Patients.Registered', '=', '1')
+                                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                                ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
+                                                ->orderBy('Debt', 'asc')
+                                                ->paginate(20);
+                            break;
+                        case "desc":
+                            $debtors = DB::table('CardIndexes')
+                                                ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
+                                                ->where('CardIndexes.IsPaid', '=', 0)
+                                                ->where('Patients.Registered', '=', '1')
+                                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                                ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
+                                                ->orderBy('Debt', 'desc')
+                                                ->paginate(20);
+                            break;
+                    }
+            }
+        }else{
+            $debtors = DB::table('CardIndexes')
+                                ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', DB::raw('sum(CardIndexes.Price) as Debt'))
+                                ->where('CardIndexes.IsPaid', '=', 0)
+                                ->where('Patients.Registered', '=', '1')
+                                ->where('Surname', 'LIKE', '%' . $search . '%')
+                                ->groupBy('Patients.Id', 'Patients.Name', 'Patients.Surname')
+                                ->orderBy('Patients.Surname', 'asc')
+                                ->paginate(20);
+        }
 
         $permissions = DB::table('users')
                             ->join('Employees', 'Employees.Id', '=', 'users.EmployeeId')

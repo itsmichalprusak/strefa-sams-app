@@ -4,6 +4,18 @@
 
 @section('content')
 
+    <div class="btn-group float-right">
+        <button type="button" class="btn btn-dark dropdown-toggle btn-outline-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sortuj wg.
+        </button>
+        <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item bg-dark text-white" href="?sort=Surname&type=asc">Nazwisko &uarr;</a>
+            <a class="dropdown-item bg-dark text-white" href="?sort=Surname&type=desc">Nazwisko &darr;</a>
+            <a class="dropdown-item bg-dark text-white" href="?sort=Debt&type=asc">Kwota Zadłużenia &uarr;</a>
+            <a class="dropdown-item bg-dark text-white" href="?sort=Debt&type=desc">Kwota Zadłużenia &darr;</a>
+        </div>
+    </div>
+
     @foreach($permissions as $perm)
     <div class="table-responsive">
         <form action="{{Route('Debtors')}}" method="get" class="form-inline">

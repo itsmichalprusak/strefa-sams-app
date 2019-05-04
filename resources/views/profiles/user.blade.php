@@ -17,7 +17,7 @@
                     </div>
 
                     @if($id)
-                    <table class="table table-dark bg-dark table-bordered">
+                    <table class="table table-dark bg-dark table-bordered w-auto">
                     <tr>
                         <th>Imie i Nazwisko</th>
                         <th>Data Urodzenia</th>
@@ -75,7 +75,7 @@
                         {{$cardindexes->links()}}
 
                     @elseif($emid)
-                        <table class="table table-dark bg-dark table-bordered">
+                        <table class="table table-dark bg-dark table-bordered w-auto">
                             <tr>
                                 <th>Imie i Nazwisko</th>
                                 <th>Data ostatniego awansu</th>
