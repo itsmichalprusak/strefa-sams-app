@@ -68,8 +68,8 @@
                                     <td>{{$card->TreatmentCategory}} | {{$card->Description}}</td>
                                     <td>{{$card->Price}}$</td>
                                     <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
-                                    <td>{{$card->Recognition}}</td>
-                                    <td>{{$card->Treatment}}</td>
+                                    <td>{{str_limit($card->Recognition, 50)}} @if(strlen($card->Recognition) > 50) <a href="{{Route('home')}}?id={{$card->CardId}}&pid={{$card->Id}}"> &raquo </a> @endif</td>
+                                    <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Recognition) > 50) <a href="{{Route('home')}}?id={{$card->CardId}}&pid={{$card->Id}}"> &raquo </a> @endif</td>
                                     <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEditd{{$card->CardId}}">Edytuj</button></td>
                                     <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEditdel{{$card->CardId}}">Usuń</button></td>
                                 </tr>
@@ -136,8 +136,8 @@
                                         <td>{{$card->TreatmentCategory}} | {{$card->Description}}</td>
                                         <td>{{$card->Price}}$</td>
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
-                                        <td>{{$card->Recognition}}</td>
-                                        <td>{{$card->Treatment}}</td>
+                                        <td>{{str_limit($card->Recognition, 50)}} @if(strlen($card->Recognition) > 50) <a href="{{Route('home')}}?id={{$card->CardId}}&eid={{$card->emId}}"> &raquo </a> @endif</td>
+                                        <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Recognition) > 50) <a href="{{Route('home')}}?id={{$card->CardId}}&pid={{$card->emId}}"> &raquo </a> @endif</td>
                                         <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#UserEmployeeFormTwo{{$card->CardId}}">Edytuj</button></td>
                                         <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#UserEmployeeFormTwoDelete{{$card->CardId}}">Usuń</button></td>
                                     </tr>
