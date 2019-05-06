@@ -142,6 +142,8 @@ class SitesController extends Controller
     public function home(){
 
         $id = Input::get('id');
+        $pid = Input::get('pid');
+        $eid = Input::get('eid');
 
         if($id !== null){
             $cardindexes = DB::table('CardIndexes')
@@ -180,7 +182,11 @@ class SitesController extends Controller
                                 'Treatments.InsurancePriceMax', 'Treatments.Description')
                             ->get();
 
-        if(isset($id))
+        if(isset($eid))
+            return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments, 'id' => $id, 'eid' => $eid]);
+        elseif(isset($pid))
+            return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments, 'id' => $id, 'pid' => $pid]);
+        elseif(isset($id))
             return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments, 'id' => $id]);
         else
             return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments]);
