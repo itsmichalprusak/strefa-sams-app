@@ -9,7 +9,7 @@
                 <div class="card bg-dark">
                     <div class="card-header bg-dark">Ostatnie Wpisy
                         @if(isset($id))
-                            <a class="text-white float-right" href="{{Route('home')}}">Wróć</a>
+                            <a class="text-white float-right" href="@if(isset($eid)) {{Route('user')}}?emId={{$eid}} @elseif(isset($pid)) {{Route('user')}}?id={{$pid}} @else {{Route('home')}} @endif">Wróć</a>
                         @endif
                     </div>
 
@@ -46,8 +46,8 @@
                                             <td>{{$card->Recognition, 50}}</td>
                                             <td>{{$card->Treatment, 50}}</td>
                                         @else
-                                        <td>{{str_limit($card->Recognition, 50)}} @if(strlen($card->Recognition) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
-                                        <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Recognition) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
+                                            <td>{{str_limit($card->Recognition, 50)}} @if(strlen($card->Recognition) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
+                                            <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Recognition) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
                                         @endif
                                         <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</button></td>
                                         <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#Formd{{$card->CardId}}">Usuń</button></td>
