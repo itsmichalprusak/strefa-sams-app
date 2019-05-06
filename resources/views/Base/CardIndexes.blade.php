@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <label for="imie">Imię i Nazwisko</label>
-            <select required name="PatientId" class="form-control bg-dark text-white" id="imie">
+            <select required name="PatientId" class="form-control bg-dark text-white" id="imieSelect">
                 @foreach($patients as $patient)
                     <option value="{{$patient->Id}}">{{$patient->Name}} {{$patient->Surname}} || @if($patient->IsInsured == 1) Ubezpieczony @elseif($patient->IsInsured == 0) Nieubezpieczony @endif</option>
                 @endforeach

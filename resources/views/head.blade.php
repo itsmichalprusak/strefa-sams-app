@@ -196,7 +196,7 @@
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/js/select2.full.js"></script>
         <script type="text/javascript">
-                $("#imie").select2({
+                $("#imieSelect").select2({
                     placeholder:'Wybierz pacjenta',
                     theme: 'bootstrap',
                 });
