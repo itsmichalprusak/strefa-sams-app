@@ -7,7 +7,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header bg-dark">Ostatnie Wpisy</div>
+                    <div class="card-header bg-dark">Ostatnie Wpisy
+                        @if(isset($id))
+                            <a class="text-white float-right" href="{{Route('home')}}">Wróć</a>
+                        @endif
+                    </div>
 
                     <div class="card-body bg-dark">
                         @if (session('status'))
@@ -51,9 +55,6 @@
                                 @endforeach
 
                             </table>
-                            @if(isset($id))
-                                <a class="text-white" href="{{Route('home')}}">Wróć</a>
-                            @endif
                         </div>
                             @foreach($cardindexes as $card)
                                 @include('popup.home')
