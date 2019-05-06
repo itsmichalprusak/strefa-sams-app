@@ -11,7 +11,7 @@
         <script src="{{ asset('js/script.js') }}" defer></script>
         <!-- Select2 -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/css/select2.css" rel="stylesheet" />
-        <link href="search2css/select2-bootstrap4.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="{{ asset('css/select2-bootstrap.css') }}">
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -198,8 +198,9 @@
         <script type="text/javascript">
                 $("#imie").select2({
                     placeholder:'Wybierz pacjenta',
-                    theme: 'bootstrap4',
+                    theme: 'bootstrap',
                 });
+                $.fn.select2.defaults.set( "theme", "bootstrap" );
         </script>
 
 
