@@ -141,15 +141,29 @@ class SitesController extends Controller
 
     public function home(){
 
-        $cardindexes = DB::table('CardIndexes')
-                            ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
-                            ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
-                            ->join('Treatments', 'Treatments.Id', '=', 'TreatmentCategoryId')
-                            ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Employees.Id as emId', 'Employees.Name as emName',
-                                'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'Treatments.Id as TreatmentId', 'CardIndexes.Id as CardId', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
-                                'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
-                            ->orderByDesc('CardIndexes.Date')
-                            ->paginate(7);
+        $id = Input::get('id');
+
+        if($id !== null){
+            $cardindexes = DB::table('CardIndexes')
+                                ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                                ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
+                                ->join('Treatments', 'Treatments.Id', '=', 'TreatmentCategoryId')
+                                ->where('CardIndexes.Id', '=', $id)
+                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Employees.Id as emId', 'Employees.Name as emName',
+                                    'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'Treatments.Id as TreatmentId', 'CardIndexes.Id as CardId', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
+                                    'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
+                                ->paginate(7);
+        }else{
+            $cardindexes = DB::table('CardIndexes')
+                                ->join('Patients', 'Patients.Id', '=', 'CardIndexes.PatientId')
+                                ->join('Employees', 'Employees.Id', '=', 'CardIndexes.SupervisingDoctor')
+                                ->join('Treatments', 'Treatments.Id', '=', 'TreatmentCategoryId')
+                                ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Employees.Id as emId', 'Employees.Name as emName',
+                                    'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'Treatments.Id as TreatmentId', 'CardIndexes.Id as CardId', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
+                                    'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
+                                ->orderByDesc('CardIndexes.Date')
+                                ->paginate(7);
+        }
 
         $patients = DB::table('Patients')
                             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
@@ -166,7 +180,10 @@ class SitesController extends Controller
                                 'Treatments.InsurancePriceMax', 'Treatments.Description')
                             ->get();
 
-        return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments]);
+        if(isset($id))
+            return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments, 'id' => $id]);
+        else
+            return view('home', ['cardindexes'=>$cardindexes, 'patients' => $patients, 'employees' => $employees, 'treatments' => $treatments]);
     }
 
     public function user(){

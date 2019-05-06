@@ -17,7 +17,7 @@
                         @endif
 
                         <div class="table-responsive bg-dark table-dark">
-                            <table style="width: 100%" class="table w-auto">
+                            <table class="table w-auto">
                                 <tr>
                                     <th scope="col">Imie i Nazwisko</th>
                                     <th scope="col">Data</th>
@@ -38,22 +38,29 @@
                                         <td>{{$card->TreatmentCategory}}</td>
                                         <td>{{$card->Price}}$</td>
                                         <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
-                                        <td>{{$card->Recognition}}</td>
-                                        <td>{{$card->Treatment}}</td>
+                                        @if(isset($id))
+                                            <td>{{$card->Recognition, 50}}</td>
+                                            <td>{{$card->Treatment, 50}}</td>
+                                        @else
+                                        <td>{{str_limit($card->Recognition, 50)}} @if(strlen($card->Recognition) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
+                                        <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Recognition) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
+                                        @endif
                                         <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</button></td>
                                         <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#Formd{{$card->CardId}}">Usuń</button></td>
                                     </tr>
                                 @endforeach
 
                             </table>
-
+                            @if(isset($id))
+                                <a class="text-white" href="{{Route('home')}}">Wróć</a>
+                            @endif
+                        </div>
                             @foreach($cardindexes as $card)
                                 @include('popup.home')
                             @endforeach
 
                             {{$cardindexes->links()}}
 
-                        </div>
                     </div>
                 </div>
             </div>
