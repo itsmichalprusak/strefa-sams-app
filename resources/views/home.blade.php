@@ -47,7 +47,7 @@
                                             <td>{{$card->Treatment, 50}}</td>
                                         @else
                                             <td>{{str_limit($card->Recognition, 50)}} @if(strlen($card->Recognition) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
-                                            <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Recognition) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
+                                            <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Treatment) > 50) <a href="?id={{$card->CardId}}"> &raquo </a> @endif</td>
                                         @endif
                                         <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#Form{{$card->CardId}}">Edytuj</button></td>
                                         <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#Formd{{$card->CardId}}">Usuń</button></td>

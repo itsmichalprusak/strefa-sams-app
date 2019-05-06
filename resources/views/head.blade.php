@@ -7,8 +7,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title> @yield('title') </title>
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/script.js') }}" defer></script>
+        <!-- Select2 -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/css/select2.css" rel="stylesheet" />
+        <link href="search2css/select2-bootstrap4.css" rel="stylesheet"/>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -191,5 +194,14 @@
                 @endif()
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/js/select2.full.js"></script>
+        <script type="text/javascript">
+                $("#imie").select2({
+                    placeholder:'Wybierz pacjenta',
+                    theme: 'bootstrap4',
+                });
+        </script>
+
+
     </body>
 </html>
