@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <label for="imie">Imię i Nazwisko</label>
-            <select required class="form-control bg-dark text-white" name="PatientId" id="imie">
+            <select required class="form-control bg-dark text-white" name="PatientId" id="imieSelect">
                 @foreach($patients as $patient)
                     <option value="{{$patient->Id}}">{{$patient->Name}} {{$patient->Surname}}</option>
                 @endforeach
@@ -33,13 +33,13 @@
             <small id="date" class="form-text text-muted">Podaj Datę utworzenia wpisu ubezpieczenia.</small>
         </div>
         <div class="form-group">
-            <label for="Employee">Osoba Dodająca</label>
-            <select required class="form-control bg-dark text-white" name="PersonIssuing" id="Employee">
+            <label for="EmployeeSelect">Osoba Dodająca</label>
+            <select required class="form-control bg-dark text-white" name="PersonIssuing" id="EmployeeSelect">
                 @foreach($employees as $employee)
                     <option value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
                 @endforeach
             </select>
-            <small id="Employee" class="form-text text-muted">Podaj osobę nadającą ubezpieczenie.</small>
+            <small id="EmployeeSelect" class="form-text text-muted">Podaj osobę nadającą ubezpieczenie.</small>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Dodaj Ubezpieczenie!</button>

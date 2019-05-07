@@ -16,7 +16,7 @@
                         <input type="hidden" value="{{$card->CardId}}" name="CardId">
                         <div class="form-group">
                             <label for="imie">Imię i Nazwisko</label>
-                            <select required name="PatientId" class="form-control bg-dark text-white" id="imie" >
+                            <select required name="PatientId" class="form-control bg-dark text-white" id="imieSelect" >
                                 @foreach($patients as $patient)
                                     <option @if($patient->Id == $card->Id) selected @endif value="{{$patient->Id}}"> {{$patient->Name}} {{$patient->Surname}} || @if($patient->IsInsured == 1) Ubezpieczony @elseif($patient->IsInsured == 0) Nieubezpieczony @endif
                                     </option>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             <label for="Person">Osoba Nadzorująca</label>
-                            <select required name="PersonIssuing" class="form-control bg-dark text-white" id="Person">
+                            <select required name="PersonIssuing" class="form-control bg-dark text-white" id="EmployeeSelect">
                                 @foreach($employees as $employee)
                                     <option @if($employee->Id == $card->emId) selected @endif value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
                                 @endforeach

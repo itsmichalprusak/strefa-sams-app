@@ -23,13 +23,13 @@
             <small id="imie" class="form-text text-muted">Podaj datę wykonania zabiegu.</small>
         </div>
         <div class="form-group">
-            <label for="Person">Osoba Nadzorująca</label>
-            <select required name="PersonIssuing" class="form-control bg-dark text-white" id="Person">
+            <label for="EmployeeSelect">Osoba Nadzorująca</label>
+            <select required name="PersonIssuing" class="form-control bg-dark text-white" id="EmployeeSelect">
                 @foreach($employees as $employee)
                     <option value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
                 @endforeach
             </select>
-            <small id="imie" class="form-text text-muted">Podaj osobę wykonanującą zabieg.</small>
+            <small id="EmployeeSelect" class="form-text text-muted">Podaj osobę wykonanującą zabieg.</small>
         </div>
         <div class="form-group">
             <label for="Category">Kategoria Zabiegu</label>

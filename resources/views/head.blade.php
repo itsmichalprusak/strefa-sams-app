@@ -12,6 +12,7 @@
         <!-- Select2 -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/css/select2.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('css/select2-bootstrap.css') }}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/js/select2.full.js"></script>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -195,15 +196,18 @@
                 @endif()
             </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/js/select2.full.js"></script>
-        <script type="text/javascript">
-                $("#imieSelect").select2({
-                    placeholder:'Wybierz pacjenta',
-                    theme: 'bootstrap',
-                });
-                $.fn.select2.defaults.set( "theme", "bootstrap" );
-        </script>
 
+        <script type="text/javascript">
+            $("#imieSelect").select2({
+                placeholder:'Wybierz pacjenta',
+                theme: 'bootstrap',
+            });
+            $("#EmployeeSelect").select2({
+                placeholder:'Wybierz pacjenta',
+                theme: 'bootstrap',
+            });
+            $.fn.select2.defaults.set( "theme", "bootstrap" );
+        </script>
 
     </body>
 </html>

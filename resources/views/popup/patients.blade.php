@@ -3,7 +3,7 @@
 <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content bg-dark">
         <div class="modal-header bg-dark">
-            <h3 class="modal-title" id="DelTitle">Usuwanie zabiegu</h3>
+            <h3 class="modal-title" id="DelTitle">Edycja danych pacjenta</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="form-group">
                         <label for="Person">Osoba Nadzorująca</label>
-                        <select required name="PersonIssuing" class="form-control bg-dark text-white" id="Person">
+                        <select required name="PersonIssuing" class="form-control bg-dark text-white" id="EmployeeSelect">
                             @foreach($employeestwo as $employee)
                                 <option @if($employee->Id == $card->emId) selected @endif value="{{$employee->Id}}">{{$employee->Name}} {{$employee->Surname}}</option>
                             @endforeach
