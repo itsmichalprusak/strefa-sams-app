@@ -60,7 +60,7 @@
                                 @include('popup.home')
                             @endforeach
 
-                            {{$cardindexes->links()}}
+                            {{ $cardindexes->links() }}
 
                     </div>
                 </div>
