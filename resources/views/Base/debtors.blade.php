@@ -35,7 +35,7 @@
             </tr>
             @foreach($debtors as $debtor)
                 <tr>
-                    <td><a href="{{route('user')}}?Id={{$debtor->Id}}">{{$debtor->Name}} {{$debtor->Surname}}</a></td>
+                    <td><a href="{{route('user')}}?id={{$debtor->Id}}">{{$debtor->Name}} {{$debtor->Surname}}</a></td>
                     <td>{{$debtor->Debt}}$</td>
                     @if($perm->Rank != 'Pielęgniarz')
                     <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#debtor{{$debtor->Id}}">Spłacił</button></td>
