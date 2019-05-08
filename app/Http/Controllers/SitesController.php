@@ -164,6 +164,7 @@ class SitesController extends Controller
                                     'Employees.Surname as emSurname', 'Treatments.TreatmentCategory', 'Treatments.Id as TreatmentId', 'CardIndexes.Id as CardId', 'CardIndexes.Annotation', 'CardIndexes.Date', 'CardIndexes.Price',
                                     'CardIndexes.IsPaid', 'CardIndexes.Recognition', 'CardIndexes.Treatment')
                                 ->orderByDesc('CardIndexes.Date')
+                                ->orderByDesc('CardIndexes.Id')
                                 ->paginate(7);
         }
 
