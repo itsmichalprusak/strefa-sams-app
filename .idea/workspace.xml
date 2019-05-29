@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="921e1873-2649-4101-acfc-300974acc12e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/head.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +18,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/head.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="82">
               <caret line="148" column="22" lean-forward="true" selection-start-line="148" selection-start-column="22" selection-end-line="148" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/select2-bootstrap.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/css/app.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="7" column="44897" selection-start-line="7" selection-start-column="44877" selection-end-line="7" selection-end-column="44897" />
             </state>
           </provider>
         </entry>
@@ -38,24 +55,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/Insurances/list.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-689">
-              <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -111,6 +110,8 @@
     <findStrings>
       <find>engine</find>
       <find>=&quot;close</find>
+      <find>#f8f9fa</find>
+      <find>.dropdown-item:hover</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,6 +159,7 @@
         <option value="$PROJECT_DIR$/resources/views/Base/Insurance.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/Base/Patient.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/head.blade.php" />
+        <option value="$PROJECT_DIR$/public/css/app.css" />
       </list>
     </option>
   </component>
@@ -266,6 +268,17 @@
             <path>
               <item name="strefa-sams-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="strefa-sams-app" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="strefa-sams-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="strefa-sams-app" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="strefa-sams-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="strefa-sams-app" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -333,7 +346,7 @@
       <workItem from="1555872524398" duration="1351000" />
       <workItem from="1555873896981" duration="1868000" />
       <workItem from="1555935133271" duration="20016000" />
-      <workItem from="1559159146581" duration="1761000" />
+      <workItem from="1559159146581" duration="2257000" />
     </task>
     <task id="LOCAL-00001" summary="poprawki estetyczne">
       <created>1559160605664</created>
@@ -349,11 +362,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559160806035</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="poprawka estetyczna v2">
+      <created>1559160958731</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1559160958731</updated>
+    </task>
+    <task id="LOCAL-00004" summary="poprawka estetyczna v3 xD">
+      <created>1559161232722</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1559161232722</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24996000" />
+    <option name="totallyTimeSpent" value="25492000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="-108" width="1456" height="916" extended-state="6" />
@@ -388,11 +415,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="poprawki estetyczne" />
     <MESSAGE value="poprawka" />
-    <option name="LAST_COMMIT_MESSAGE" value="poprawka" />
+    <MESSAGE value="poprawka estetyczna v2" />
+    <MESSAGE value="poprawka estetyczna v3 xD" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawka estetyczna v3 xD" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/login/LoginTemplate.blade.php" />
-    <entry file="file://$PROJECT_DIR$/resources/views/login/JuniorLogin.blade.php" />
     <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" />
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_04_22_131014_create_students_table.php" />
     <entry file="file://$PROJECT_DIR$/app/Student.php" />
@@ -659,6 +686,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="82">
           <caret line="148" column="22" lean-forward="true" selection-start-line="148" selection-start-column="22" selection-end-line="148" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/select2-bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="7" column="44897" selection-start-line="7" selection-start-column="44877" selection-end-line="7" selection-end-column="44897" />
         </state>
       </provider>
     </entry>
