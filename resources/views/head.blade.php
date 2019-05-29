@@ -83,7 +83,7 @@
                                             <a data-toggle="modal" data-target="#AddAccount" class="dropdown-item text-white">Dodaj konto</a>
                                         @endif()
                                         @endif()
-                                        <a data-toggle="modal" data-target="#ChangePassword" class="dropdown-item text-white">Zmień hasło</a>
+                                        <a data-toggle="modal" data-target="#ChangePassword" class="nav-link text-white">Zmień hasło</a>
                                         <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
