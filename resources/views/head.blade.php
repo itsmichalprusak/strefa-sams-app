@@ -81,7 +81,6 @@
                                         @else
                                         @if(Auth::user()->name == 'allahaka' or Auth::user()->name == 'KaMisia' or Auth::user()->name == 'Dr_krawix')
                                             <a data-toggle="modal" data-target="#AddAccount" class="dropdown-item text-white">Dodaj konto</a>
-                                            <a data-toggle="modal" data-target="#ChangePasswordUser" class="dropdown-item text-white">Zmień Hasło Użytkownikowi</a>
                                         @endif()
                                         @endif()
                                         <a data-toggle="modal" data-target="#ChangePassword" class="dropdown-item text-white">Zmień hasło</a>
@@ -150,59 +149,6 @@
                             </div>
                         </div>
                     @endif()
-
-                        @if(Auth::guest())
-                        @else
-                            @if(Auth::user()->name == 'allahaka' or Auth::user()->name == 'KaMisia' or Auth::user()->name == 'Dr_krawix')
-                                <div class="modal fade" id="ChangePasswordUser" tabindex="-1" role="dialog" aria-labelledby="DelCenter" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content bg-dark">
-                                            <div class="modal-header bg-dark">
-                                                <h3 class="modal-title" id="DelTitle">Zmień hasło dla użytkownika</h3>
-                                                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <form method="POST" action="{{ route('ChangePassword') }}">
-                                                    @csrf
-
-                                                    <div class="form-group row">
-                                                        <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Nick Użytkownika') }}</label>
-                                                        <div class="col-md-6">
-                                                            <input id="password" type="username" class="bg-dark text-white form-control" name="email" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Nowe hasło') }}</label>
-                                                        <div class="col-md-6">
-                                                            <input id="password" type="password" class="bg-dark text-white form-control" name="pass" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Powtórz hasło') }}</label>
-                                                        <div class="col-md-6">
-                                                            <input id="password" type="password" class="bg-dark text-white form-control" name="rpass" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row mb-0">
-                                                        <div class="col-md-8 offset-md-4">
-                                                            <button type="submit" class="btn btn-secondary">
-                                                                Zmień hasło
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif()
 
                         <div class="modal fade" id="ChangePassword" tabindex="-1" role="dialog" aria-labelledby="DelCenter" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
