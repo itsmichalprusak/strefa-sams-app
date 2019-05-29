@@ -1,6 +1,6 @@
 @extends('head')
 
-@section('title', 'SAMS - Dodaj Pacjenta')
+@section('title', 'StrefaRP SAMS - Dodaj Pacjenta')
 
 @section('body')
 

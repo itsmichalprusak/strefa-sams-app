@@ -1,6 +1,6 @@
 @extends('head')
 
-@section('title', 'Baza SAMS - StrefaRP')
+@section('title', 'StrefaRP SAMS - Baza danych')
 
 @section('body')
     @if(Auth::guest())

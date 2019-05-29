@@ -4,7 +4,7 @@
     <div class="modal-content bg-dark">
         <div class="modal-header bg-dark">
             <h3 class="modal-title" id="DelTitle">Edycja danych pacjenta</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -71,7 +71,7 @@
         <div class="modal-content bg-dark">
             <div class="modal-header bg-dark">
                 <h3 class="modal-title" id="DelTitle">Usuń pacjęta</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -97,7 +97,7 @@
         <div class="modal-content bg-dark">
             <div class="modal-header bg-dark">
                 <h5 class="modal-title" id="FormTitle">Edytuj wpis {{$card->Name}} {{$card->Surname}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -184,7 +184,7 @@
         <div class="modal-content bg-dark">
             <div class="modal-header bg-dark">
                 <h3 class="modal-title" id="DelTitle">Usuwanie zabiegu</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

@@ -4,7 +4,7 @@
         <div class="modal-content bg-dark">
             <div class="modal-header bg-dark">
                 <h3 class="modal-title" id="DelTitle">Edytowanie Danych pracowników</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -63,7 +63,7 @@
             <div class="modal-content bg-dark">
                 <div class="modal-header bg-dark">
                     <h3 class="modal-title" id="DelTitle">Usuwanie zabiegu</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -148,7 +148,7 @@
             <div class="modal-content bg-dark">
                 <div class="modal-header bg-dark">
                     <h3 class="modal-title bg-dark" id="DelTitle">Usuwanie zabiegu</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

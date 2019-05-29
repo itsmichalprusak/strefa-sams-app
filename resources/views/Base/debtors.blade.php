@@ -1,6 +1,6 @@
 @extends('head')
 
-@section('title', 'SAMS - dłużnicy')
+@section('title', 'StrefaRP SAMS - Lista Dłużników')
 
 @section('content')
 

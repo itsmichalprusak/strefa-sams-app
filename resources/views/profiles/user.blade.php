@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'SAMS - profile')
+@section('title', 'StrefaRP SAMS - Profil')
 
 @section('content')
 

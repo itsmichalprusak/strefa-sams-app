@@ -1,6 +1,6 @@
 @extends('head')
 
-@section('title', 'SAMS - Pacjenci')
+@section('title', 'StrefaRP SAMS - Pacjenci')
 
 @section('content')
 

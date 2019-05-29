@@ -1,6 +1,6 @@
 @extends('head')
 
-@section('title', 'SAMS - Lista pracowników')
+@section('title', 'StrefaRP SAMS - Lista pracowników')
 
 @section('content')
 

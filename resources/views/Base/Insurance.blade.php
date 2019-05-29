@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'SAMS - Dodaj ubezpieczenie')
+@section('title', 'StrefaRP SAMS - Dodaj ubezpieczenie')
 
 @section('content')
 

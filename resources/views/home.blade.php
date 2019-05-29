@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'SAMS')
+@section('title', 'StrefaRP SAMS - Baza danych')
 
 @section('content')
     <div class="container bg-dark">
