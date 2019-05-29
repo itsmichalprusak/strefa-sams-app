@@ -26,7 +26,7 @@
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-dark text-white">
                 <div class="container">
                     <a class="navbar-brand text-white" href="{{ url('/') }}">
-                        SAMS StrefaRP - Baza danych
+                        StrefaRP SAMS - Baza danych
                     </a>
 
                     <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
