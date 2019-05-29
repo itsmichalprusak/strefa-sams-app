@@ -56,11 +56,11 @@
 
                             </table>
                         </div>
-                            @foreach($cardindexes as $card)
-                                @include('popup.home')
-                            @endforeach
+                        @foreach($cardindexes as $card)
+                            @include('popup.home')
+                        @endforeach
 
-                            {{ $cardindexes->links() }}
+                        {{ $cardindexes->links() }}
 
                     </div>
                 </div>

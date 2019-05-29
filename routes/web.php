@@ -87,8 +87,8 @@ Route::get('/debtors/list',[
 ]);
 
 Route::post('/cardindexes/change',[
-   'uses' => 'SitesController@CardIndexUpdate',
-   'as' => 'CardIndexUpdate',
+    'uses' => 'SitesController@CardIndexUpdate',
+    'as' => 'CardIndexUpdate',
 ]);
 
 Route::post('/cardindexes/deletes',[

@@ -19,61 +19,61 @@
                     @if($id)
                         <div class="table-responsive bg-dark table-dark">
                             <table class="table table-dark bg-dark table-bordered w-auto">
-                            <tr>
-                                <th>Imie i Nazwisko</th>
-                                <th>Data Urodzenia</th>
-                                <th>Ubezpieczony</th>
-                                <th>Numer Telefonu</th>
-                                <th>Komentarze</th>
-                                <th>Grupa Krwi</th>
-                                <th>Nick Discord</th>
-                                <th>Edytuj</th>
-                                <th>Usuń</th>
-                            </tr>
-                            @foreach ($patients as $user)
                                 <tr>
-                                    <td>{{$user->Name}} {{$user->Surname}}</td>
-                                    <td>{{$user->BirthDate}}</td>
-                                    <td>@if($user->IsInsured == 0) Nie @else Tak @endif </td>
-                                    <td>{{$user->PhoneNumber}}</td>
-                                    <td>{{$user->Comments}}</td>
-                                    <td>{{$user->BloodGroup}}</td>
-                                    <td>{{$user->Email}}</td>
-                                    <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEdit{{$user->Id}}">Edytuj</button></td>
-                                    <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#DeletePatient{{$user->Id}}">Usuń</button></td>
+                                    <th>Imie i Nazwisko</th>
+                                    <th>Data Urodzenia</th>
+                                    <th>Ubezpieczony</th>
+                                    <th>Numer Telefonu</th>
+                                    <th>Komentarze</th>
+                                    <th>Grupa Krwi</th>
+                                    <th>Nick Discord</th>
+                                    <th>Edytuj</th>
+                                    <th>Usuń</th>
                                 </tr>
-                            @endforeach
+                                @foreach ($patients as $user)
+                                    <tr>
+                                        <td>{{$user->Name}} {{$user->Surname}}</td>
+                                        <td>{{$user->BirthDate}}</td>
+                                        <td>@if($user->IsInsured == 0) Nie @else Tak @endif </td>
+                                        <td>{{$user->PhoneNumber}}</td>
+                                        <td>{{$user->Comments}}</td>
+                                        <td>{{$user->BloodGroup}}</td>
+                                        <td>{{$user->Email}}</td>
+                                        <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEdit{{$user->Id}}">Edytuj</button></td>
+                                        <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#DeletePatient{{$user->Id}}">Usuń</button></td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </div>
                         <br><br><h2>Ostatnie wpisy o pacjencie</h2><br><br>
-                    <div class="table-responsive bg-dark table-dark">
-                        <table id="table" class="table table-dark bg-dark table-bordered w-auto">
-                            <tr>
-                                <th>Imie i Nazwisko</th>
-                                <th>Data</th>
-                                <th>Lekarz Nadzorujący</th>
-                                <th>Kategoria zabiegu</th>
-                                <th>Cena</th>
-                                <th>Zapłacono</th>
-                                <th>Rozpoznanie</th>
-                                <th>Zabieg</th>
-                                <th>Edytuj</th>
-                                <th>Usuń</th>
-                            </tr>
-                            @foreach ($cardindexes as $card)
+                        <div class="table-responsive bg-dark table-dark">
+                            <table id="table" class="table table-dark bg-dark table-bordered w-auto">
                                 <tr>
-                                    <td>{{$card->Name}} {{$card->Surname}}</td>
-                                    <td>{{$card->Date}}</td>
-                                    <td><a href="{{route('user')}}?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
-                                    <td>{{$card->TreatmentCategory}} | {{$card->Description}}</td>
-                                    <td>{{$card->Price}}$</td>
-                                    <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
-                                    <td>{{str_limit($card->Recognition, 50)}} @if(strlen($card->Recognition) > 50) <a href="{{Route('home')}}?id={{$card->CardId}}&pid={{$card->Id}}"> &raquo </a> @endif</td>
-                                    <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Treatment) > 50) <a href="{{Route('home')}}?id={{$card->CardId}}&pid={{$card->Id}}"> &raquo </a> @endif</td>
-                                    <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEditd{{$card->CardId}}">Edytuj</button></td>
-                                    <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEditdel{{$card->CardId}}">Usuń</button></td>
+                                    <th>Imie i Nazwisko</th>
+                                    <th>Data</th>
+                                    <th>Lekarz Nadzorujący</th>
+                                    <th>Kategoria zabiegu</th>
+                                    <th>Cena</th>
+                                    <th>Zapłacono</th>
+                                    <th>Rozpoznanie</th>
+                                    <th>Zabieg</th>
+                                    <th>Edytuj</th>
+                                    <th>Usuń</th>
                                 </tr>
-                            @endforeach
+                                @foreach ($cardindexes as $card)
+                                    <tr>
+                                        <td>{{$card->Name}} {{$card->Surname}}</td>
+                                        <td>{{$card->Date}}</td>
+                                        <td><a href="{{route('user')}}?emId={{$card->emId}}">{{$card->emName}} {{$card->emSurname}}</a></td>
+                                        <td>{{$card->TreatmentCategory}} | {{$card->Description}}</td>
+                                        <td>{{$card->Price}}$</td>
+                                        <td>@if($card->IsPaid == 0) Nie @else Tak @endif</td>
+                                        <td>{{str_limit($card->Recognition, 50)}} @if(strlen($card->Recognition) > 50) <a href="{{Route('home')}}?id={{$card->CardId}}&pid={{$card->Id}}"> &raquo </a> @endif</td>
+                                        <td>{{str_limit($card->Treatment, 50)}} @if(strlen($card->Treatment) > 50) <a href="{{Route('home')}}?id={{$card->CardId}}&pid={{$card->Id}}"> &raquo </a> @endif</td>
+                                        <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEditd{{$card->CardId}}">Edytuj</button></td>
+                                        <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#FormEditdel{{$card->CardId}}">Usuń</button></td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </div>
                         {{$cardindexes->links()}}

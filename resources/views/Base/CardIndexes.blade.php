@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             <label for="Price">Cena</label>
-                <input required pattern="\d+" type="text" name="price" class="form-control bg-dark text-white" id="Price">
+            <input required pattern="\d+" type="text" name="price" class="form-control bg-dark text-white" id="Price">
             <small id="imie" class="form-text text-muted">Podaj koszt zabieg.</small>
         </div>
         <div class="form-group">
@@ -55,12 +55,12 @@
         </div>
         <div class="form-group">
             <label for="Recognition">Rozpoznanie</label>
-                <textarea required name="Recognition" class="form-control bg-dark text-white" id="Recognition" placeholder="Rozpoznanie:"> </textarea>
+            <textarea required name="Recognition" class="form-control bg-dark text-white" id="Recognition" placeholder="Rozpoznanie:"> </textarea>
             <small id="imie" class="form-text text-muted">Podaj Rozpoznanie pacjenta (Jakie rany, co go bolało).</small>
         </div>
         <div class="form-group">
             <label for="Treatment">Zabieg</label>
-                <textarea required name="Treatment" class="form-control bg-dark text-white" id="Treatment" placeholder="Leczenie:"> </textarea>
+            <textarea required name="Treatment" class="form-control bg-dark text-white" id="Treatment" placeholder="Leczenie:"> </textarea>
             <small id="imie" class="form-text text-muted">Podaj działania jakie wykonałeś podczas zabiegu np. założony gips, przypisane leki raz dziennie przez tydzień.</small>
         </div>
         <div class="form-group">
