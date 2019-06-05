@@ -76,7 +76,7 @@
                                 @endforeach
                             </table>
                         </div>
-                        {{$cardindexes->links()}}
+                        {{$cardindexes->appends(request()->query())->links()}}
 
                     @elseif($emid)
                         <div class="table-responsive bg-dark table-dark">
@@ -144,7 +144,7 @@
                                 @endforeach
                             </table>
                         </div>
-                        {{$cards->links()}}
+                        {{$cards->appends(request()->query())->links()}}
 
                     @endif
                 </div>

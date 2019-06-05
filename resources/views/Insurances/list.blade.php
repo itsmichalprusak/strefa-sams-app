@@ -73,7 +73,7 @@
 
         @include('popup.list')
 
-        {{$insurances->links()}}
+        {{$insurances->appends(request()->query())->links()}}
     </div>
 
 @endsection

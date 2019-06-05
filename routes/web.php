@@ -156,5 +156,10 @@ Route::post('/account/password/change',[
     'as' => 'ChangePassword',
 ]);
 
+Route::post('/EmployeeUsers/delete',[
+    'uses' => 'SitesController@EmployeeUsersDelete',
+    'as' => 'EmployeeUsersDelete',
+]);
+
 
 Auth::routes();

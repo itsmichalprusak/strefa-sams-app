@@ -42,7 +42,7 @@
                 </tr>
             @endforeach
         </table>
-        {{$patients->links()}}
+        {{$patients->appends(request()->query())->links()}}
     </div>
 
 @endsection

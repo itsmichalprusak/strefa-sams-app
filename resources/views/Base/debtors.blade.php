@@ -43,7 +43,7 @@
                     </tr>
                 @endforeach
             </table>
-            {{$debtors->links()}}
+            {{$debtors->appends(request()->query())->links()}}
             @foreach($debtors as $debtor)
                 @include('popup.debtors')
             @endforeach

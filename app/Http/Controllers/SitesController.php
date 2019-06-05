@@ -302,13 +302,17 @@ class SitesController extends Controller
 
     public function CardIndexes(){
 
+        $id = Auth::id();
+
         $patients = DB::table('Patients')
             ->select('Patients.Id', 'Patients.Name', 'Patients.Surname', 'Patients.IsInsured')
             ->where('Patients.Registered', '=', '1')
             ->get();
 
         $employees = DB::table('Employees')
+            ->join('users', 'users.EmployeeId', '=', 'Employees.Id')
             ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+            ->where('users.id', '=', $id)
             ->get();
 
         $treatments = DB::table('Treatments')
@@ -386,7 +390,13 @@ class SitesController extends Controller
                 ->paginate(15);
         }
 
-        return view('profiles.employees', ['employees' => $employees, 'search' => $search]);
+        $permissions = DB::table('users')
+            ->join('Employees', 'Employees.Id', '=', 'users.EmployeeId')
+            ->select('Employees.Rank as Rank')
+            ->where('users.id', '=', Auth::id())
+            ->get();
+
+        return view('profiles.employees', ['employees' => $employees, 'search' => $search, 'permissions' => $permissions]);
     }
 
     public function Debtors(){
@@ -698,6 +708,19 @@ class SitesController extends Controller
         }
 
         return redirect(Route('home'));
+    }
+
+    public function EmployeeUsersDelete(Request $req){
+        $id = $req->input('Id');
+
+        DB::table('Employees')
+            ->where('Id', '=', $id)
+            ->delete();
+        DB::table('users')
+            ->where('EmployeeId', '=', $id)
+            ->delete();
+
+        return redirect(Route('EmployeesList'));
     }
 
 }
