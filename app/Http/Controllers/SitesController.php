@@ -266,8 +266,13 @@ class SitesController extends Controller
 
     public function addinsurance(){
 
+        $id = Auth::id();
+
         $employees = DB::table('Employees')
+            ->join('users', 'users.EmployeeId', '=', 'Employees.Id')
             ->select('Employees.Id', 'Employees.Name', 'Employees.Surname')
+            ->where('Registered', '=', '1')
+            ->where('users.id', '=', $id)
             ->get();
 
         $patients = DB::table('Patients')
@@ -380,12 +385,14 @@ class SitesController extends Controller
             $employees = DB::table('Employees')
                 ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber')
                 ->where('Surname', 'LIKE', '%' . $search . '%')
+                ->where('Registered', '=', '1')
                 ->orderBy($sort, $type)
                 ->paginate(15);
         }else{
             $employees = DB::table('Employees')
                 ->select('Employees.Id', 'Employees.Name', 'Employees.Surname', 'Employees.Rank', 'Employees.BirthDate', 'Employees.PhoneNumber')
                 ->where('Surname', 'LIKE', '%' . $search . '%')
+                ->where('Registered', '=', '1')
                 ->orderBy('Employees.Surname', 'asc')
                 ->paginate(15);
         }
@@ -713,9 +720,12 @@ class SitesController extends Controller
     public function EmployeeUsersDelete(Request $req){
         $id = $req->input('Id');
 
+        $values = array('Registred' => '0');
+
         DB::table('Employees')
             ->where('Id', '=', $id)
-            ->delete();
+            ->update($values);
+
         DB::table('users')
             ->where('EmployeeId', '=', $id)
             ->delete();

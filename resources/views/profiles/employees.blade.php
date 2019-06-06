@@ -34,7 +34,8 @@
                 <th>Numer telefonu</th>
                 @foreach($permissions as $perm)
                     @if($perm->Rank == 'Dyrektor')
-                        <th>Zapłacono</th>
+                        <th>Usuń</th>
+                        <th>Edytuj</th>
                     @endif
                 @endforeach
             </tr>
@@ -47,6 +48,7 @@
                     @foreach($permissions as $perm)
                         @if($perm->Rank == 'Dyrektor')
                             <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#employeeDelete{{$employee->Id}}">Usuń</button></td>
+                            <td><button class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#employeeEdit{{$employee->Id}}">Edytuj</button></td>
                         @endif
                     @endforeach
                 </tr>
@@ -55,6 +57,7 @@
         {{$employees->appends(request()->query())->links()}}
         @foreach($employees as $employee)
             @include('popup.EmployeeDelete')
+            @include('popup.EmployeeEdit')
         @endforeach
     </div>
 
